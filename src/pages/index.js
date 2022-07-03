@@ -58,11 +58,12 @@ const MAPS = {
 }
 export default function Home({ wards, bikeLanes }) {
     const { url, attribution } = MAPS['alidade_smooth_dark']
+    const title = 'Jersey City Protected Bike Lane & Ward Map'
     return (
         <div className={styles.container}>
             <Head>
-                <title>Create Next App</title>
-                <link rel="icon" href="/favicon.ico" />
+                <title>{title}</title>
+                <link rel="icon" href="/maps/favicon.ico" />
             </Head>
 
             <main className={styles.main}>
