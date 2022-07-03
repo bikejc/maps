@@ -1,0 +1,1068 @@
+{
+  "objectIdFieldName": "OBJECTID",
+  "uniqueIdField": {
+    "name": "OBJECTID",
+    "isSystemMaintained": true
+  },
+  "globalIdFieldName": "",
+  "geometryProperties": {
+    "shapeLengthFieldName": "Shape__Length",
+    "units": "esriMeters"
+  },
+  "geometryType": "esriGeometryPolyline",
+  "spatialReference": {
+    "wkid": 4326,
+    "latestWkid": 4326
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Type",
+      "type": "esriFieldTypeString",
+      "alias": "Type",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "StreetName",
+      "type": "esriFieldTypeString",
+      "alias": "Street Name",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "From_",
+      "type": "esriFieldTypeString",
+      "alias": "From",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "To_",
+      "type": "esriFieldTypeString",
+      "alias": "To",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Direction",
+      "type": "esriFieldTypeString",
+      "alias": "Direction",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Ward",
+      "type": "esriFieldTypeString",
+      "alias": "Ward",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Status",
+      "type": "esriFieldTypeString",
+      "alias": "Status",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "LaneCount",
+      "type": "esriFieldTypeString",
+      "alias": "Lane Count",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "InstallYear",
+      "type": "esriFieldTypeString",
+      "alias": "Install Year",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "UpdateYear",
+      "type": "esriFieldTypeString",
+      "alias": "Update Year",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "SurfaceTreatment",
+      "type": "esriFieldTypeString",
+      "alias": "Surface Treatment",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "ProtectionType",
+      "type": "esriFieldTypeString",
+      "alias": "Protection Type",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Buffered",
+      "type": "esriFieldTypeString",
+      "alias": "Buffered?",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Raised",
+      "type": "esriFieldTypeString",
+      "alias": "Raised?",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Contraflow",
+      "type": "esriFieldTypeString",
+      "alias": "Contraflow?",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Comments",
+      "type": "esriFieldTypeString",
+      "alias": "Comments",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Miles",
+      "type": "esriFieldTypeDouble",
+      "alias": "Miles",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Shape__Length",
+      "type": "esriFieldTypeDouble",
+      "alias": "Shape__Length",
+      "sqlType": "sqlTypeDouble",
+      "domain": null,
+      "defaultValue": null
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 1,
+        "Type": "PROTECTED BIKE LANE",
+        "StreetName": "JOHNSTON AVE",
+        "From_": "GRAND ST",
+        "To_": "LIBERTY STATE PARK LRT STATION",
+        "Direction": "N/S",
+        "Ward": "F",
+        "Status": "PLANNED",
+        "LaneCount": "2",
+        "InstallYear": null,
+        "UpdateYear": null,
+        "SurfaceTreatment": null,
+        "ProtectionType": null,
+        "Buffered": null,
+        "Raised": null,
+        "Contraflow": null,
+        "Comments": "CYCLE TRACK",
+        "Miles": 0.553192732326666,
+        "Shape__Length": 1175.4276127563
+      },
+      "geometry": {
+        "paths": [
+          [
+            [
+              -74.0553404724245,
+              40.7110303084507
+            ],
+            [
+              -74.0564494213041,
+              40.7119400214702
+            ],
+            [
+              -74.0570795664728,
+              40.7124695894976
+            ],
+            [
+              -74.0577187341417,
+              40.7129894504546
+            ],
+            [
+              -74.0583225024587,
+              40.7135003742299
+            ],
+            [
+              -74.059353051656,
+              40.7143219557827
+            ],
+            [
+              -74.0596601338811,
+              40.7145800534215
+            ],
+            [
+              -74.0600010388984,
+              40.7148504009612
+            ],
+            [
+              -74.060289450856,
+              40.7150994150925
+            ],
+            [
+              -74.0609586816071,
+              40.7156400101964
+            ],
+            [
+              -74.061618718755,
+              40.7161698856212
+            ],
+            [
+              -74.0623704181275,
+              40.7167690534694
+            ],
+            [
+              -74.0624794919875,
+              40.7169196663641
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 2,
+        "Type": "PROTECTED BIKE LANE",
+        "StreetName": "COLUMBUS DR",
+        "From_": "MARIN BLVD",
+        "To_": "GREENE ST",
+        "Direction": "E/W",
+        "Ward": "E",
+        "Status": "PLANNED",
+        "LaneCount": "2",
+        "InstallYear": null,
+        "UpdateYear": null,
+        "SurfaceTreatment": null,
+        "ProtectionType": null,
+        "Buffered": null,
+        "Raised": null,
+        "Contraflow": null,
+        "Comments": null,
+        "Miles": 0.324193464896828,
+        "Shape__Length": 687.80750456233
+      },
+      "geometry": {
+        "paths": [
+          [
+            [
+              -74.041332161887,
+              40.719032662759
+            ],
+            [
+              -74.0372215202415,
+              40.7177436816746
+            ],
+            [
+              -74.0355840186747,
+              40.7173203799548
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 3,
+        "Type": "PROTECTED BIKE LANE",
+        "StreetName": "MARIN BLVD",
+        "From_": "18TH ST",
+        "To_": "OBSERVER HWY",
+        "Direction": "N/S",
+        "Ward": "E",
+        "Status": "PLANNED",
+        "LaneCount": "2",
+        "InstallYear": null,
+        "UpdateYear": null,
+        "SurfaceTreatment": null,
+        "ProtectionType": null,
+        "Buffered": null,
+        "Raised": null,
+        "Contraflow": null,
+        "Comments": "CYCLE TRACK",
+        "Miles": 0.175821220567685,
+        "Shape__Length": 374.341035353568
+      },
+      "geometry": {
+        "paths": [
+          [
+            [
+              -74.0390302181646,
+              40.7342402113597
+            ],
+            [
+              -74.0389800330238,
+              40.7345301543399
+            ],
+            [
+              -74.0388096045187,
+              40.7354308569639
+            ],
+            [
+              -74.0386950751253,
+              40.7362202804712
+            ],
+            [
+              -74.0385735129019,
+              40.7367640827704
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 12,
+        "Type": "PROTECTED BIKE LANE",
+        "StreetName": "COLUMBUS DR",
+        "From_": "BRUNSWICK ST",
+        "To_": "MARIN BLVD",
+        "Direction": "E/W",
+        "Ward": "E/F",
+        "Status": "PLANNED",
+        "LaneCount": "2",
+        "InstallYear": null,
+        "UpdateYear": null,
+        "SurfaceTreatment": null,
+        "ProtectionType": null,
+        "Buffered": null,
+        "Raised": null,
+        "Contraflow": null,
+        "Comments": null,
+        "Miles": 0.564623073645308,
+        "Shape__Length": 1197.94133736966
+      },
+      "geometry": {
+        "paths": [
+          [
+            [
+              -74.041332161887,
+              40.719032662759
+            ],
+            [
+              -74.0430395302205,
+              40.719540928774
+            ],
+            [
+              -74.0451000078306,
+              40.7202211989928
+            ],
+            [
+              -74.0457900997693,
+              40.7204297523974
+            ],
+            [
+              -74.0466496650315,
+              40.7206899393159
+            ],
+            [
+              -74.0481822693948,
+              40.7211496993553
+            ],
+            [
+              -74.0497325841007,
+              40.7216421278512
+            ],
+            [
+              -74.0505888940185,
+              40.7218886502645
+            ],
+            [
+              -74.0507451331702,
+              40.7219058221511
+            ],
+            [
+              -74.0512179206113,
+              40.7219407886551
+            ],
+            [
+              -74.0513482879536,
+              40.7219598584441
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 13,
+        "Type": "PROTECTED BIKE LANE",
+        "StreetName": "CAVEN POINT RD",
+        "From_": "CHAPEL AVE",
+        "To_": "BAYVIEW AVE",
+        "Direction": "N/S",
+        "Ward": "F",
+        "Status": "PLANNED",
+        "LaneCount": "2",
+        "InstallYear": null,
+        "UpdateYear": null,
+        "SurfaceTreatment": null,
+        "ProtectionType": null,
+        "Buffered": null,
+        "Raised": null,
+        "Contraflow": null,
+        "Comments": "CYCLE TRACK",
+        "Miles": 0.892116290058757,
+        "Shape__Length": 1893.69531396052
+      },
+      "geometry": {
+        "paths": [
+          [
+            [
+              -74.0816912203676,
+              40.6934009904417
+            ],
+            [
+              -74.0811145307321,
+              40.6939936094534
+            ],
+            [
+              -74.0808278583389,
+              40.6942905633965
+            ],
+            [
+              -74.0805218040327,
+              40.6945963988094
+            ],
+            [
+              -74.0803509843982,
+              40.6947729120305
+            ],
+            [
+              -74.080297766531,
+              40.6948187606277
+            ],
+            [
+              -74.080010556012,
+              40.6950664711189
+            ],
+            [
+              -74.0796305130198,
+              40.695379708607
+            ],
+            [
+              -74.0796000947955,
+              40.6954070951785
+            ],
+            [
+              -74.0792415224789,
+              40.6956455912229
+            ],
+            [
+              -74.0791976937101,
+              40.6956678130277
+            ],
+            [
+              -74.079055313401,
+              40.6957299623114
+            ],
+            [
+              -74.0787648763098,
+              40.6958216265236
+            ],
+            [
+              -74.0786902202991,
+              40.6958360246908
+            ],
+            [
+              -74.0786213002058,
+              40.6958499177095
+            ],
+            [
+              -74.0785400393481,
+              40.6958608817954
+            ],
+            [
+              -74.0784695222315,
+              40.6958705117952
+            ],
+            [
+              -74.0783930628532,
+              40.695878266154
+            ],
+            [
+              -74.0783804237859,
+              40.6958797305798
+            ],
+            [
+              -74.078330085163,
+              40.6958796840572
+            ],
+            [
+              -74.0782577849923,
+              40.6958859429344
+            ],
+            [
+              -74.078057399524,
+              40.6959037497117
+            ],
+            [
+              -74.0779322031176,
+              40.6959149647621
+            ],
+            [
+              -74.0778692908938,
+              40.6959202964367
+            ],
+            [
+              -74.0777860933527,
+              40.6959379132084
+            ],
+            [
+              -74.0776856467994,
+              40.6959584193271
+            ],
+            [
+              -74.0775650510035,
+              40.6959839326846
+            ],
+            [
+              -74.0775386768143,
+              40.6959889858914
+            ],
+            [
+              -74.0775128382496,
+              40.6959949336695
+            ],
+            [
+              -74.0774878159187,
+              40.6960001978005
+            ],
+            [
+              -74.0774105465227,
+              40.6960218871055
+            ],
+            [
+              -74.0773341796232,
+              40.6960435109998
+            ],
+            [
+              -74.0772448014186,
+              40.6960683830164
+            ],
+            [
+              -74.0772321388534,
+              40.696073555025
+            ],
+            [
+              -74.077151248598,
+              40.6961114353326
+            ],
+            [
+              -74.0770452954455,
+              40.6961609651157
+            ],
+            [
+              -74.0769763502401,
+              40.6961929840548
+            ],
+            [
+              -74.0769462190555,
+              40.6962072241833
+            ],
+            [
+              -74.0768699994933,
+              40.6962482798996
+            ],
+            [
+              -74.0768299861114,
+              40.6962702426814
+            ],
+            [
+              -74.0767985917383,
+              40.6962987600163
+            ],
+            [
+              -74.0767490559408,
+              40.6963428659672
+            ],
+            [
+              -74.0766951586259,
+              40.6963918996306
+            ],
+            [
+              -74.0766413531821,
+              40.6964406589537
+            ],
+            [
+              -74.076612957372,
+              40.69646575409
+            ],
+            [
+              -74.0765726816251,
+              40.696500624437
+            ],
+            [
+              -74.0765297783873,
+              40.6965372703662
+            ],
+            [
+              -74.0764899562224,
+              40.6965717303703
+            ],
+            [
+              -74.0764225625837,
+              40.6966292972505
+            ],
+            [
+              -74.0764106774014,
+              40.6966398963863
+            ],
+            [
+              -74.0763785061792,
+              40.6966770622744
+            ],
+            [
+              -74.0763452406316,
+              40.6967160780346
+            ],
+            [
+              -74.0763114320321,
+              40.6967553664433
+            ],
+            [
+              -74.076274621592,
+              40.6967985576072
+            ],
+            [
+              -74.0762320009705,
+              40.6968474951118
+            ],
+            [
+              -74.0761950989105,
+              40.6968908919016
+            ],
+            [
+              -74.0761662888043,
+              40.6969243622731
+            ],
+            [
+              -74.0761407502521,
+              40.6969540681914
+            ],
+            [
+              -74.0761063029606,
+              40.6969944527989
+            ],
+            [
+              -74.0760565893613,
+              40.697052221701
+            ],
+            [
+              -74.075960159822,
+              40.6971644746324
+            ],
+            [
+              -74.0759072615253,
+              40.6972264888674
+            ],
+            [
+              -74.0758713648847,
+              40.6972677606955
+            ],
+            [
+              -74.0758444144528,
+              40.6972924489712
+            ],
+            [
+              -74.0757974171879,
+              40.6973343666199
+            ],
+            [
+              -74.0757265566251,
+              40.6973978253503
+            ],
+            [
+              -74.0756909901022,
+              40.6974296915238
+            ],
+            [
+              -74.0756851894544,
+              40.6974339273009
+            ],
+            [
+              -74.0756309108664,
+              40.6974716983477
+            ],
+            [
+              -74.0755747220526,
+              40.6975119342085
+            ],
+            [
+              -74.0754909000139,
+              40.6975706760666
+            ],
+            [
+              -74.0754455606234,
+              40.6975929620918
+            ],
+            [
+              -74.0753782274274,
+              40.6976264965762
+            ],
+            [
+              -74.0752925224131,
+              40.6976691642575
+            ],
+            [
+              -74.0751993047115,
+              40.6977157180133
+            ],
+            [
+              -74.0751679033683,
+              40.6977309142786
+            ],
+            [
+              -74.0750842508422,
+              40.6977628779536
+            ],
+            [
+              -74.0749862176229,
+              40.6978005563054
+            ],
+            [
+              -74.0749267108804,
+              40.697823339271
+            ],
+            [
+              -74.0748461315001,
+              40.697854352808
+            ],
+            [
+              -74.0748319308513,
+              40.6978601368524
+            ],
+            [
+              -74.0748072614851,
+              40.6978665003048
+            ],
+            [
+              -74.0747220445915,
+              40.6978890511453
+            ],
+            [
+              -74.0746742398825,
+              40.6979017149864
+            ],
+            [
+              -74.0736086656744,
+              40.6981887458809
+            ],
+            [
+              -74.0730089561055,
+              40.698346269367
+            ],
+            [
+              -74.0720189512986,
+              40.6986282923411
+            ],
+            [
+              -74.0714387093301,
+              40.6987909996871
+            ],
+            [
+              -74.0708982092655,
+              40.6989451480503
+            ],
+            [
+              -74.0704890694789,
+              40.6990705994024
+            ],
+            [
+              -74.0699949249964,
+              40.6992336197571
+            ],
+            [
+              -74.0698728444375,
+              40.699283339711
+            ],
+            [
+              -74.0695738713956,
+              40.6994327496159
+            ],
+            [
+              -74.0693807283099,
+              40.6995487623944
+            ],
+            [
+              -74.0692355012267,
+              40.6996408902548
+            ],
+            [
+              -74.0690765558001,
+              40.6997739256873
+            ],
+            [
+              -74.0689649694846,
+              40.699865154794
+            ],
+            [
+              -74.0687553787741,
+              40.7000276959209
+            ],
+            [
+              -74.0685688010424,
+              40.7001683072247
+            ],
+            [
+              -74.0682114774403,
+              40.7004977149034
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 14,
+        "Type": null,
+        "StreetName": null,
+        "From_": null,
+        "To_": null,
+        "Direction": null,
+        "Ward": null,
+        "Status": null,
+        "LaneCount": null,
+        "InstallYear": null,
+        "UpdateYear": null,
+        "SurfaceTreatment": null,
+        "ProtectionType": null,
+        "Buffered": null,
+        "Raised": null,
+        "Contraflow": null,
+        "Comments": null,
+        "Miles": null,
+        "Shape__Length": 1182.77955600418
+      },
+      "geometry": {
+        "paths": [
+          [
+            [
+              -74.042359190085,
+              40.71730892654
+            ],
+            [
+              -74.0422812938233,
+              40.7176645941459
+            ],
+            [
+              -74.0422199297018,
+              40.717993533315
+            ],
+            [
+              -74.0421697013521,
+              40.718165580765
+            ],
+            [
+              -74.0421314800559,
+              40.7182371986043
+            ],
+            [
+              -74.0420556142696,
+              40.7182962270601
+            ],
+            [
+              -74.0418888691278,
+              40.718402741129
+            ],
+            [
+              -74.0414643332265,
+              40.7186871763452
+            ],
+            [
+              -74.0414136524388,
+              40.718741519783
+            ],
+            [
+              -74.0413436797037,
+              40.7188579867173
+            ],
+            [
+              -74.0413317104918,
+              40.7189526748024
+            ],
+            [
+              -74.0413433217,
+              40.7190933890111
+            ],
+            [
+              -74.0413485789146,
+              40.7192436472257
+            ],
+            [
+              -74.0413189987712,
+              40.7195219950441
+            ],
+            [
+              -74.041199409544,
+              40.7200870627822
+            ],
+            [
+              -74.0411282087977,
+              40.7205652424915
+            ],
+            [
+              -74.0410346992441,
+              40.7211782598872
+            ],
+            [
+              -74.040980773292,
+              40.7215215816376
+            ],
+            [
+              -74.0408588479487,
+              40.7222426183269
+            ],
+            [
+              -74.0407811431827,
+              40.7227513933682
+            ],
+            [
+              -74.0406983733154,
+              40.7232649327818
+            ],
+            [
+              -74.0405906464492,
+              40.7241152103077
+            ],
+            [
+              -74.0404521376442,
+              40.7250514882803
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 15,
+        "Type": "PROTECTED BIKE LANE",
+        "StreetName": "COLES AVE",
+        "From_": "10TH ST",
+        "To_": "18TH ST",
+        "Direction": "N/S",
+        "Ward": "E",
+        "Status": "PLANNED",
+        "LaneCount": "2",
+        "InstallYear": null,
+        "UpdateYear": null,
+        "SurfaceTreatment": null,
+        "ProtectionType": null,
+        "Buffered": null,
+        "Raised": null,
+        "Contraflow": null,
+        "Comments": null,
+        "Miles": null,
+        "Shape__Length": 859.090886317913
+      },
+      "geometry": {
+        "paths": [
+          [
+            [
+              -74.0465700845741,
+              40.7291745232562
+            ],
+            [
+              -74.0464956984154,
+              40.729717897272
+            ],
+            [
+              -74.0463601196098,
+              40.7305980400147
+            ],
+            [
+              -74.0463104073811,
+              40.7308548888154
+            ],
+            [
+              -74.0462155022173,
+              40.7313857065281
+            ],
+            [
+              -74.0461386742275,
+              40.7317932346727
+            ],
+            [
+              -74.0461296356405,
+              40.7318891232852
+            ],
+            [
+              -74.0461160777599,
+              40.7320329559448
+            ],
+            [
+              -74.046152232108,
+              40.7321904865961
+            ],
+            [
+              -74.0460754041182,
+              40.7326151325812
+            ],
+            [
+              -74.0459262674321,
+              40.7335397555929
+            ],
+            [
+              -74.0457952079202,
+              40.7342383511242
+            ],
+            [
+              -74.0456807597286,
+              40.7347983528272
+            ],
+            [
+              -74.0456295550541,
+              40.7349700046812
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

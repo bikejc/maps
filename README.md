@@ -1,5 +1,9 @@
 # 🍃 Next.js Leaflet Starter
 
+```bash
+curl 'https://services2.arcgis.com/UXbywc7dSkfgdPp4/ArcGIS/rest/services/JC_Planned_Protected_Bike_Lanes/FeatureServer/3/query?f=json&where=1%3D1&returnGeometry=true&outFields=*&outSR=4326&resultOffset=0&resultRecordCount=10000' | jq | tee JC_Planned_Protected_Bike_Lanes.json
+```
+
 Jumpstart your new Next.js mapping project with Leaflet!
 
 ## ⚡ Quick Deploy
