@@ -1,6 +1,6 @@
-# Jersey City Protected Bike Lane + Ward Map
+# [bikejc.github.io/maps](https://bikejc.github.io/maps/)
 
-![](./imgs/screenshot.png)
+[![Jersey City Protected Bike Lane + Ward Map](./imgs/screenshot.png)](https://bikejc.github.io/maps/)
 
 ## Data Fetching
 Download layers from the city's arcgis server, as json:
