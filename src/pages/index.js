@@ -11,11 +11,13 @@ const DEFAULT_ZOOM = 13
 
 function loadFeatures(name) {
     const data = JSON.parse(fs.readFileSync(path.join(process.cwd(), `public/${name}`)))
+    // const res = await fetch(`/${name}`)
+    // const data = await res.json()
     const features = data['features']
     return features
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
     const wards = loadFeatures('wards.json')
     const bikeLanes = loadFeatures('JC_Bike_Network.json').filter(({ attributes }) => attributes.Type !== 'BIKE LANE')
     const plannedBikeLanes = loadFeatures('JC_Planned_Protected_Bike_Lanes.json')
@@ -55,7 +57,6 @@ const MAPS = {
     },
 }
 export default function Home({ wards, bikeLanes }) {
-    console.log(bikeLanes)
     const { url, attribution } = MAPS['alidade_smooth_dark']
     return (
         <div className={styles.container}>
@@ -97,9 +98,6 @@ export default function Home({ wards, bikeLanes }) {
                                     const type = (status == 'PLANNED') ? `PLANNED ${Type}` : Type
                                     if (type !== 'PROTECTED BIKE LANE' && type !== 'PLANNED PROTECTED BIKE LANE') return
                                     const color = bikeLaneTypes[type?.trim()]?.color || 'black'
-                                    if (color == 'black') {
-                                        console.log(attributes)
-                                    }
                                     return geometry.paths.map((positions, idx) => {
                                         positions = positions.map(([lon, lat]) => [lat, lon])
                                         const key = `${OBJECTID}_${idx}`
