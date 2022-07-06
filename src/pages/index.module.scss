@@ -32,6 +32,10 @@
     list-style-type: none;
     text-align: left;
     padding-inline-start: 0.5em;
-    margin: 0.5em
+    margin: 0.5em;
+
+    label {
+      user-select: none;
+    }
   }
 }
