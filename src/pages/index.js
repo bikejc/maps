@@ -231,31 +231,38 @@ export default function Home({ layers, }) {
                 <div className={css.gearContainer} onMouseEnter={() => setHoverSettings(true)} onMouseLeave={() => setHoverSettings(false)}>
                     <div className={css.settings}>
                         <i className={`fa fa-gear ${css.gear}`} onClick={() => setShowSettings(!showSettings)} />
-                        {(showSettings || hoverSettings) && <div className={css.menu}>
-                            <ul className={css.layers}>
-                                {
-                                    [
-                                        { label: "Bike Lanes", key: "bikeLanes"},
-                                        { label: "Roads", key: "roads"},
-                                        { label: "Wards", key: "wards"},
-                                    ].map(({ label, key, }) => {
-                                        const active = activeLayers.includes(key)
-                                        function onChange(e) {
-                                            const checked = e.target.checked
-                                            if (checked === active) {
-                                                console.error(`layer ${key}: checked ${checked} != active ${active}`)
+                        {
+                            (showSettings || hoverSettings) &&
+                            <div className={css.menu}>
+                                <ul className={css.layers}>
+                                    {
+                                        [
+                                            { label: "Bike Lanes", key: "bikeLanes"},
+                                            { label: "Roads", key: "roads"},
+                                            { label: "Wards", key: "wards"},
+                                        ].map(({ label, key, }) => {
+                                            const active = activeLayers.includes(key)
+                                            function onChange(e) {
+                                                const checked = e.target.checked
+                                                if (checked === active) {
+                                                    console.error(`layer ${key}: checked ${checked} != active ${active}`)
+                                                }
+                                                if (checked) {
+                                                    setActiveLayers([ ...activeLayers, key ])
+                                                } else {
+                                                    setActiveLayers(activeLayers.filter(k => k !== key))
+                                                }
                                             }
-                                            if (checked) {
-                                                setActiveLayers([ ...activeLayers, key ])
-                                            } else {
-                                                setActiveLayers(activeLayers.filter(k => k !== key))
-                                            }
-                                        }
-                                        return <li key={key}><label><input type={"checkbox"} onChange={onChange} checked={active} />{label}</label></li>
-                                    })
-                                }
-                            </ul>
-                        </div>}
+                                            return <li key={key}><label><input type={"checkbox"} onChange={onChange} checked={active} />{label}</label></li>
+                                        })
+                                    }
+                                </ul>
+                                <div className={css.icons}>
+                                    <a href={"https://github.com/bikejc/maps"}><img className={css.icon} src={"./gh.png"} /></a>
+                                    <a href={"https://bikejc.org"}><img className={css.icon} src={"./logo.png"} /></a>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
                 </>}

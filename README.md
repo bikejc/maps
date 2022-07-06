@@ -3,7 +3,7 @@
 
 ## Interactive version: [bikejc.github.io/maps](https://bikejc.github.io/maps/)
 
-Compared with the full road network:
+### Compared with the full road network <a id="pbls-vs-roads"></a>
 
 ![](imgs/pbls-roads.gif)
 
