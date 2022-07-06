@@ -146,7 +146,7 @@ function MapLayer({ TileLayer, Polygon, Polyline, ZoomControl, Popup, Tooltip, a
             {('wards' in fetchedLayers) && activeLayers.includes('wards') && wardsLayer()}
             {('roads' in fetchedLayers) && activeLayers.includes('roads') && roadsLayer()}
             {('bikeLanes' in fetchedLayers) && activeLayers.includes('bikeLanes') && bikeLanesLayer()}
-            <ZoomControl position="bottomleft" />
+            {/*<ZoomControl position="bottomleft" />*/}
         </>
     )
 }
