@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import fs from 'fs'
 import path from 'path'
-import css from 'index.module.scss'
+import css from './index.module.scss'
 
 import Map from '../components/Map';
 
