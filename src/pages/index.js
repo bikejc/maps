@@ -152,8 +152,6 @@ function MapLayer({ TileLayer, Polygon, Polyline, ZoomControl, Popup, Tooltip, a
 }
 
 export default function Home({ layers, }) {
-    const title = 'Jersey City Protected Bike Lane & Ward Map'
-
     const [ rawActiveLayers, setActiveLayers ] = useState(new Set([ 'wards', 'bikeLanes', ]))
     let activeLayers = Array.from(rawActiveLayers).map(k => [ layerOrder.indexOf(k), k ]).sort(([ l ], [ r ]) => l - r).map(([ _, k ]) => k)
 
@@ -165,6 +163,25 @@ export default function Home({ layers, }) {
     const [ hoverSettings, setHoverSettings ] = useState(false)
 
     const href = (typeof window !== 'undefined') && window.location.href
+
+    const title = useMemo(() => {
+        let title
+        const titleElems = []
+        if (activeLayers.includes('bikeLanes')) titleElems.push(['Protected Bike Lanes'])
+        if (activeLayers.includes('roads')) titleElems.push(['Roads'])
+        if (activeLayers.includes('wards')) titleElems.push(['Wards'])
+        if (titleElems.length === 0) {
+            title = null
+        } else if (titleElems.length === 1) {
+            title = `JC ${titleElems[0]}`
+        } else if (titleElems.length === 2) {
+            title = `JC ${titleElems[0]} & ${titleElems[1]}`
+        } else if (titleElems.length === 3) {
+            title = `JC ${titleElems[0]}, ${titleElems[1]}, & ${titleElems[2]}`
+        }
+        console.log(activeLayers, title, titleElems)
+        return title
+    }, [ activeLayers ])
 
     useEffect(() => {
         if (!href) return
@@ -201,9 +218,7 @@ export default function Home({ layers, }) {
                 <Map className={styles.homeMap} center={DEFAULT_CENTER} zoom={DEFAULT_ZOOM} zoomControl={false}>
                     { props => MapLayer({ ...props, activeLayerIndices, fetchedLayers, activeLayers, }) }
                 </Map>
-                <div className={styles.title}>
-                    Jersey City Protected Bike Lane + Ward Map
-                </div>
+                <div className={styles.title}>{title}</div>
                 <div className={css.gearContainer} onMouseEnter={() => setHoverSettings(true)} onMouseLeave={() => setHoverSettings(false)}>
                     <div className={css.settings}>
                         <i className={`fa fa-gear ${css.gear}`} onClick={() => setShowSettings(!showSettings)} />

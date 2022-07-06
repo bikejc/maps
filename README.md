@@ -1,8 +1,26 @@
-# [bikejc.github.io/maps](https://bikejc.github.io/maps/)
-
 [![Jersey City Protected Bike Lane + Ward Map](./imgs/screenshot.png)](https://bikejc.github.io/maps/)
+(purple = planned for 2022)
 
-## Data Fetching
+## Interactive version: [bikejc.github.io/maps](https://bikejc.github.io/maps/)
+
+Compared with the full road network:
+
+![](imgs/pbls-roads.gif)
+
+## Scratchwork
+
+### Process screenshots
+
+```bash
+for f in 1-pbls.png 2-roads.png; do
+    convert -strip -crop 2240x2660+982+238 orig/$f cropped/$f
+done
+```
+```bash
+convert -resize 50% -delay 150 -loop 0 cropped/1-pbls.png cropped/2-roads.png pbls-roads.gif
+```
+
+### Fetch Data
 Download layers from the city's arcgis server, as json:
 ```bash
 format="json"
