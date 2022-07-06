@@ -211,6 +211,15 @@ export default function Home({ layers, }) {
                 <title>{title}</title>
                 <link rel="icon" href="/maps/favicon.ico" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+                <meta name="twitter:card" content="summary" key="twcard" />
+                <meta name="twitter:creator" content={"RunsAsCoded"} key="twhandle" />
+
+                <meta property="og:url" content={"https://bikejc.github.io/maps"} key="ogurl" />
+                <meta property="og:image" content={"https://bikejc.github.io/maps/1-pbls.png"} key="ogimage" />
+                <meta property="og:site_name" content={"Bike JC Protected Bike Lane Map"} key="ogsitename" />
+                <meta property="og:title" content={"JC Protected Bike Lane & Ward Map"} key="ogtitle" />
+                <meta property="og:description" content={"≈10 protected bike lanes overlaid on the 6 council wards"} key="ogdesc" />
             </Head>
 
             <main className={styles.main}>{
