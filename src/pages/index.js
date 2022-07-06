@@ -7,7 +7,7 @@ import Map from '../components/Map';
 
 import styles from '../../styles/Home.module.css';
 
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 
 const DEFAULT_CENTER = [40.720, -74.066]
 const DEFAULT_ZOOM = 13
@@ -59,7 +59,7 @@ const dataUrls = {
     'roads': 'Roads_Jersey_City.json',
 }
 
-const layerOrder = [ 'wards', 'bikeLanes', 'roads', ]
+const layerOrder = [ 'wards', 'roads', 'bikeLanes', ]
 
 function MapLayer({ TileLayer, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, }) {
     const wardsLayer = () => {
@@ -77,37 +77,11 @@ function MapLayer({ TileLayer, Polygon, Polyline, ZoomControl, Popup, Tooltip, a
                         return (
                             <Polygon style={{zIndex: 1}} weight={1} color={"black"} fillColor={color} key={key}
                                      positions={positions} fillOpacity={0.2}>
-                                <Popup>
+                                <Tooltip sticky={true}>
                                     <span>Ward {wardId}:</span>{' '}
                                     <span>{councillor}</span>
-                                </Popup>
+                                </Tooltip>
                             </Polygon>
-                        )
-                    })
-                )
-            })
-        )
-    }
-
-    const bikeLanesLayer = () => {
-        const rank = activeLayerIndices['bikeLanes']
-        return (
-            fetchedLayers['bikeLanes'].map(({ attributes, geometry }) => {
-                let { OBJECTID, Street_Name: name, Type, Surface_Treatment: surface, Status: status, } = attributes
-                name = name || attributes.StreetName
-                const type = (status === 'PLANNED') ? `PLANNED ${Type}` : Type
-                if (type !== 'PROTECTED BIKE LANE' && type !== 'PLANNED PROTECTED BIKE LANE') return
-                const color = bikeLaneTypes[type?.trim()]?.color || 'black'
-                return (
-                    geometry.paths.map((positions, idx) => {
-                        positions = positions.map(([lon, lat]) => [lat, lon])
-                        const key = `${OBJECTID}_${idx}_rank${rank}`
-                        return (
-                            <Polyline color={color} key={key} positions={positions}>
-                                <Popup>
-                                    {name}, {type}, {surface}
-                                </Popup>
-                            </Polyline>
                         )
                     })
                 )
@@ -130,10 +104,36 @@ function MapLayer({ TileLayer, Polygon, Polyline, ZoomControl, Popup, Tooltip, a
                     positions = positions.map(([lon, lat]) => [lat, lon])
                     return (
                         <Polyline color={"red"} key={key} positions={positions}>
-                            <Popup>{title}</Popup>
+                            <Tooltip sticky={true}>{title}</Tooltip>
                         </Polyline>
                     )
                 })
+            })
+        )
+    }
+
+    const bikeLanesLayer = () => {
+        const rank = activeLayerIndices['bikeLanes']
+        return (
+            fetchedLayers['bikeLanes'].map(({ attributes, geometry }) => {
+                let { OBJECTID, Street_Name: name, Type, Surface_Treatment: surface, Status: status, } = attributes
+                name = name || attributes.StreetName
+                const type = (status === 'PLANNED') ? `PLANNED ${Type}` : Type
+                if (type !== 'PROTECTED BIKE LANE' && type !== 'PLANNED PROTECTED BIKE LANE') return
+                const color = bikeLaneTypes[type?.trim()]?.color || 'black'
+                return (
+                    geometry.paths.map((positions, idx) => {
+                        positions = positions.map(([lon, lat]) => [lat, lon])
+                        const key = `${OBJECTID}_${idx}_rank${rank}`
+                        return (
+                            <Polyline color={color} key={key} positions={positions}>
+                                <Tooltip sticky={true}>
+                                    {name}, {type}
+                                </Tooltip>
+                            </Polyline>
+                        )
+                    })
+                )
             })
         )
     }
@@ -144,8 +144,8 @@ function MapLayer({ TileLayer, Polygon, Polyline, ZoomControl, Popup, Tooltip, a
         <>
             <TileLayer url={url} attribution={attribution}/>
             {('wards' in fetchedLayers) && activeLayers.includes('wards') && wardsLayer()}
-            {('bikeLanes' in fetchedLayers) && activeLayers.includes('bikeLanes') && bikeLanesLayer()}
             {('roads' in fetchedLayers) && activeLayers.includes('roads') && roadsLayer()}
+            {('bikeLanes' in fetchedLayers) && activeLayers.includes('bikeLanes') && bikeLanesLayer()}
             <ZoomControl position="bottomleft" />
         </>
     )
@@ -154,13 +154,12 @@ function MapLayer({ TileLayer, Polygon, Polyline, ZoomControl, Popup, Tooltip, a
 export default function Home({ layers, }) {
     const title = 'Jersey City Protected Bike Lane & Ward Map'
 
-    const [ rawActiveLayers, setActiveLayers ] = useState([ 'wards', 'bikeLanes', ])
-    let activeLayers = rawActiveLayers.map(k => [ layerOrder.indexOf(k), k ]).sort(([ l ], [ r ]) => l - r).map(([ _, k ]) => k)
-    const activeLayerIndices = Object.fromEntries(activeLayers.map((k, idx) => [ k, idx ]))
-
-    console.log("active:", activeLayers, "raw:", rawActiveLayers)
+    const [ rawActiveLayers, setActiveLayers ] = useState(new Set([ 'wards', 'bikeLanes', ]))
+    let activeLayers = Array.from(rawActiveLayers).map(k => [ layerOrder.indexOf(k), k ]).sort(([ l ], [ r ]) => l - r).map(([ _, k ]) => k)
 
     const [ fetchedLayers, setFetchedLayers ] = useState(layers)
+
+    const activeLayerIndices = useMemo(() => Object.fromEntries(activeLayers.filter(k => k in fetchedLayers).map((k, idx) => [ k, idx ])), [ fetchedLayers, activeLayers, ])
 
     const [ showSettings, setShowSettings ] = useState(false)
     const [ hoverSettings, setHoverSettings ] = useState(false)
@@ -182,7 +181,7 @@ export default function Home({ layers, }) {
             const newLayers = { ...layers }
             newLayers[k] = features
             setFetchedLayers(newLayers)
-            setActiveLayers([ ...activeLayers, k, ])
+            setActiveLayers(new Set([ ...activeLayers, k, ]))
             return Promise.resolve()
         }
 
@@ -212,8 +211,8 @@ export default function Home({ layers, }) {
                             <ul className={css.layers}>
                                 {
                                     [
-                                        { label: "Roads", key: "roads"},
                                         { label: "Bike Lanes", key: "bikeLanes"},
+                                        { label: "Roads", key: "roads"},
                                         { label: "Wards", key: "wards"},
                                     ].map(({ label, key, }) => {
                                         const active = activeLayers.includes(key)
