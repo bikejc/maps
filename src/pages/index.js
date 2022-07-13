@@ -72,7 +72,7 @@ const layerInfos = [
     // { label: "Light-Up Ride 7/8/22", key: "lur"},
 ]
 
-const layerOrder = [ 'wards', 'roads', 'bikeLanes', 'citibike', ]
+const layerOrder = [ 'wards', 'roads', 'HIN', 'bikeLanes', 'citibike', ]
 
 function MapLayer({ TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, }) {
     const wardsLayer = () => {
@@ -230,7 +230,7 @@ export default function Home({ layers, }) {
                     console.warn(`fetchLayers: duplicate add ${k}`)
                     return layers
                 } else {
-                    console.log(`fetchLayers: updating ${k}: ${layer}`)
+                    console.log(`fetchLayers: updating ${k} (${layer.length} elems)`)
                     return Object.fromEntries(Object.entries(layers).map(([ key, val ]) => key === k ? [ key, layer ] : [ key, val ]))
                 }
             } else {
@@ -244,7 +244,7 @@ export default function Home({ layers, }) {
     )
 
     console.log("render: fetchedLayers:", fetchedLayers)
-    const activeLayerIndices = useMemo(() => Object.fromEntries(activeLayers.filter(k => k in fetchedLayers).map((k, idx) => [ k, idx ])), [ fetchedLayers, activeLayers, ])
+    const activeLayerIndices = useMemo(() => Object.fromEntries(activeLayers.filter(k => k in fetchedLayers && fetchedLayers[k]).map((k, idx) => [ k, idx ])), [ fetchedLayers, activeLayers, ])
 
     const [ showSettings, setShowSettings ] = useState(false)
     const [ hoverSettings, setHoverSettings ] = useState(false)
