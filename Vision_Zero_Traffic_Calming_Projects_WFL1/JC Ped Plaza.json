@@ -1,0 +1,280 @@
+{
+    "objectIdFieldName": "OBJECTID",
+    "uniqueIdField": {
+        "name": "OBJECTID",
+        "isSystemMaintained": true
+    },
+    "globalIdFieldName": "",
+    "geometryProperties": {
+        "shapeLengthFieldName": "Shape__Length",
+        "units": "esriMeters"
+    },
+    "geometryType": "esriGeometryPolyline",
+    "spatialReference": {
+        "wkid": 4326,
+        "latestWkid": 4326
+    },
+    "fields": [
+        {
+            "name": "OBJECTID",
+            "type": "esriFieldTypeOID",
+            "alias": "OBJECTID",
+            "sqlType": "sqlTypeOther",
+            "domain": null,
+            "defaultValue": null
+        },
+        {
+            "name": "Street_Segment",
+            "type": "esriFieldTypeString",
+            "alias": "Street_Segment",
+            "sqlType": "sqlTypeOther",
+            "length": 255,
+            "domain": null,
+            "defaultValue": null
+        },
+        {
+            "name": "From_",
+            "type": "esriFieldTypeString",
+            "alias": "From",
+            "sqlType": "sqlTypeOther",
+            "length": 255,
+            "domain": null,
+            "defaultValue": null
+        },
+        {
+            "name": "To_",
+            "type": "esriFieldTypeString",
+            "alias": "To",
+            "sqlType": "sqlTypeOther",
+            "length": 255,
+            "domain": null,
+            "defaultValue": null
+        },
+        {
+            "name": "Phase",
+            "type": "esriFieldTypeString",
+            "alias": "Phase",
+            "sqlType": "sqlTypeOther",
+            "length": 255,
+            "domain": null,
+            "defaultValue": null
+        },
+        {
+            "name": "Closure_Type",
+            "type": "esriFieldTypeString",
+            "alias": "Closure Type",
+            "sqlType": "sqlTypeOther",
+            "length": 255,
+            "domain": null,
+            "defaultValue": null
+        },
+        {
+            "name": "Shape__Length",
+            "type": "esriFieldTypeDouble",
+            "alias": "Shape__Length",
+            "sqlType": "sqlTypeDouble",
+            "domain": null,
+            "defaultValue": null
+        }
+    ],
+    "features": [
+        {
+            "attributes": {
+                "OBJECTID": 1,
+                "Street_Segment": "1st St",
+                "From_": "Newark Ave",
+                "To_": "Jersey Ave",
+                "Phase": "Expanded Plaza",
+                "Closure_Type": "Street",
+                "Shape__Length": 73.524579191143
+            },
+            "geometry": {
+                "paths": [
+                    [
+                        [
+                            -74.0466854121299,
+                            40.722030945698
+                        ],
+                        [
+                            -74.0460293641914,
+                            40.7219730368335
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 2,
+                "Street_Segment": "Newark Ave",
+                "From_": "Jersey Ave",
+                "To_": "Barrow St",
+                "Phase": "Existing Plaza",
+                "Closure_Type": "Street",
+                "Shape__Length": 204.007498401746
+            },
+            "geometry": {
+                "paths": [
+                    [
+                        [
+                            -74.0451104646892,
+                            40.7211197016093
+                        ],
+                        [
+                            -74.0447302075414,
+                            40.7209197504753
+                        ]
+                    ],
+                    [
+                        [
+                            -74.0451104646892,
+                            40.7211197016093
+                        ],
+                        [
+                            -74.0448841221647,
+                            40.7211412261004
+                        ]
+                    ],
+                    [
+                        [
+                            -74.0460731675039,
+                            40.7215848436166
+                        ],
+                        [
+                            -74.0454881624399,
+                            40.7213034883698
+                        ],
+                        [
+                            -74.0451104646892,
+                            40.7211197016093
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 4,
+                "Street_Segment": "Newark Ave",
+                "From_": "Erie St",
+                "To_": "Grove St",
+                "Phase": "Existing Plaza",
+                "Closure_Type": "Street",
+                "Shape__Length": 207.709121850631
+            },
+            "geometry": {
+                "paths": [
+                    [
+                        [
+                            -74.0444770588486,
+                            40.7208059407654
+                        ],
+                        [
+                            -74.0441287077464,
+                            40.7206241092021
+                        ],
+                        [
+                            -74.043578702973,
+                            40.7203431283345
+                        ],
+                        [
+                            -74.0434464797335,
+                            40.7202818829476
+                        ],
+                        [
+                            -74.0429119715913,
+                            40.7200368794492
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 12,
+                "Street_Segment": "Grove St",
+                "From_": "1st St",
+                "To_": "Montgomery St",
+                "Phase": "Expanded Plaza",
+                "Closure_Type": null,
+                "Shape__Length": 299.676070017346
+            },
+            "geometry": {
+                "paths": [
+                    [
+                        [
+                            -74.0430945926319,
+                            40.719414687204
+                        ],
+                        [
+                            -74.0441176413628,
+                            40.7175274062227
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 18,
+                "Street_Segment": "Bergen Ave",
+                "From_": "Sip Ave",
+                "To_": "JFK Blvd",
+                "Phase": "Expanded Plaza",
+                "Closure_Type": null,
+                "Shape__Length": 82.2005843802338
+            },
+            "geometry": {
+                "paths": [
+                    [
+                        [
+                            -74.0642927296618,
+                            40.7315008594529
+                        ],
+                        [
+                            -74.0643488302776,
+                            40.7312338781738
+                        ],
+                        [
+                            -74.0644070978698,
+                            40.7309480538396
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 22,
+                "Street_Segment": "Grove St",
+                "From_": "1st St",
+                "To_": "Montgomery St",
+                "Phase": "Expanded Plaza",
+                "Closure_Type": null,
+                "Shape__Length": 240.518560460663
+            },
+            "geometry": {
+                "paths": [
+                    [
+                        [
+                            -74.0426504087624,
+                            40.7216555819341
+                        ],
+                        [
+                            -74.0427207288913,
+                            40.7209537707202
+                        ],
+                        [
+                            -74.0428597612052,
+                            40.720248909222
+                        ],
+                        [
+                            -74.0429001708718,
+                            40.7200300440482
+                        ]
+                    ]
+                ]
+            }
+        }
+    ]
+}

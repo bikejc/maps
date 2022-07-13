@@ -1,0 +1,316 @@
+{
+    "objectIdFieldName": "OBJECTID",
+    "uniqueIdField": {
+        "name": "OBJECTID",
+        "isSystemMaintained": true
+    },
+    "globalIdFieldName": "",
+    "geometryType": "esriGeometryPoint",
+    "spatialReference": {
+        "wkid": 4326,
+        "latestWkid": 4326
+    },
+    "fields": [
+        {
+            "name": "OBJECTID",
+            "type": "esriFieldTypeOID",
+            "alias": "OBJECTID",
+            "sqlType": "sqlTypeOther",
+            "domain": null,
+            "defaultValue": null
+        },
+        {
+            "name": "MJR_RD",
+            "type": "esriFieldTypeString",
+            "alias": "MJR_RD",
+            "sqlType": "sqlTypeOther",
+            "length": 255,
+            "domain": null,
+            "defaultValue": null
+        },
+        {
+            "name": "MNR_RD",
+            "type": "esriFieldTypeString",
+            "alias": "MNR_RD",
+            "sqlType": "sqlTypeOther",
+            "length": 255,
+            "domain": null,
+            "defaultValue": null
+        },
+        {
+            "name": "Units",
+            "type": "esriFieldTypeString",
+            "alias": "Units",
+            "sqlType": "sqlTypeOther",
+            "length": 255,
+            "domain": null,
+            "defaultValue": null
+        }
+    ],
+    "features": [
+        {
+            "attributes": {
+                "OBJECTID": 1,
+                "MJR_RD": "Garfield Ave",
+                "MNR_RD": "Bramhall Ave",
+                "Units": "2"
+            },
+            "geometry": {
+                "x": -74.06889491408668,
+                "y": 40.71212421625604
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 2,
+                "MJR_RD": "Garfield Ave",
+                "MNR_RD": "Union St",
+                "Units": "2"
+            },
+            "geometry": {
+                "x": -74.06986995508424,
+                "y": 40.71092994297871
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 3,
+                "MJR_RD": "Garfield Ave",
+                "MNR_RD": "Richard St",
+                "Units": "2"
+            },
+            "geometry": {
+                "x": -74.0798794657903,
+                "y": 40.700206875892086
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 4,
+                "MJR_RD": "West Side Ave",
+                "MNR_RD": "Harrison Ave",
+                "Units": "2"
+            },
+            "geometry": {
+                "x": -74.08068584770278,
+                "y": 40.721775918876496
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 5,
+                "MJR_RD": "Newark Ave",
+                "MNR_RD": "5th St",
+                "Units": "2"
+            },
+            "geometry": {
+                "x": -74.05167646950083,
+                "y": 40.725317414675224
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 6,
+                "MJR_RD": "Newark Ave",
+                "MNR_RD": "Pavonia Ave",
+                "Units": "4"
+            },
+            "geometry": {
+                "x": -74.05490011384532,
+                "y": 40.72895889669513
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 7,
+                "MJR_RD": "Summit Ave",
+                "MNR_RD": "Belomt Ave / Clinton Pl",
+                "Units": "2"
+            },
+            "geometry": {
+                "x": -74.06755808239215,
+                "y": 40.7186306081758
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 8,
+                "MJR_RD": "Central Ave",
+                "MNR_RD": "Reservoir Ave",
+                "Units": "2"
+            },
+            "geometry": {
+                "x": -74.05302183745519,
+                "y": 40.74073618196496
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 9,
+                "MJR_RD": "Newark Ave",
+                "MNR_RD": "Waldo Ave",
+                "Units": "4"
+            },
+            "geometry": {
+                "x": -74.05480224175807,
+                "y": 40.728613461853406
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 10,
+                "MJR_RD": "Pavonia Ave",
+                "MNR_RD": "Homestead Pl",
+                "Units": "2"
+            },
+            "geometry": {
+                "x": -74.06100940859434,
+                "y": 40.73277856635999
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 11,
+                "MJR_RD": "Greene St",
+                "MNR_RD": "Bay St",
+                "Units": "2"
+            },
+            "geometry": {
+                "x": -74.03507806439637,
+                "y": 40.720098185133345
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 12,
+                "MJR_RD": "Grand St",
+                "MNR_RD": "Clinton Ave",
+                "Units": "2"
+            },
+            "geometry": {
+                "x": -74.07085181835991,
+                "y": 40.71483208643999
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 13,
+                "MJR_RD": "Summit Ave",
+                "MNR_RD": "Reservoir Ave",
+                "Units": "2"
+            },
+            "geometry": {
+                "x": -74.05538490232311,
+                "y": 40.74170739959327
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 14,
+                "MJR_RD": "Central Ave",
+                "MNR_RD": "Hopkins Ave",
+                "Units": "2"
+            },
+            "geometry": {
+                "x": -74.05568036858593,
+                "y": 40.736746225576155
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 15,
+                "MJR_RD": "Thomas Gangemi Dr",
+                "MNR_RD": "Mall Dr W",
+                "Units": "3"
+            },
+            "geometry": {
+                "x": -74.0391280377219,
+                "y": 40.72468104873202
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 16,
+                "MJR_RD": "Thomas Gangemi Dr",
+                "MNR_RD": "Mall Drive E",
+                "Units": "3"
+            },
+            "geometry": {
+                "x": -74.03773755218634,
+                "y": 40.72456164567372
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 17,
+                "MJR_RD": "Newark Ave",
+                "MNR_RD": "7th St",
+                "Units": "3"
+            },
+            "geometry": {
+                "x": -74.05340808320432,
+                "y": 40.72691403869872
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 18,
+                "MJR_RD": "Broadway",
+                "MNR_RD": "Giles Ave",
+                "Units": "4"
+            },
+            "geometry": {
+                "x": -74.07208541773701,
+                "y": 40.73618176252793
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 19,
+                "MJR_RD": "Tonnelle Ave",
+                "MNR_RD": "Pavonia Ave",
+                "Units": "4"
+            },
+            "geometry": {
+                "x": -74.06727487566725,
+                "y": 40.73352988259729
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 20,
+                "MJR_RD": "Baldwin Ave",
+                "MNR_RD": "Waverly St",
+                "Units": "4"
+            },
+            "geometry": {
+                "x": -74.05081983502333,
+                "y": 40.737754660924594
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 21,
+                "MJR_RD": "West Side Ave",
+                "MNR_RD": "Logan Ave",
+                "Units": "2"
+            },
+            "geometry": {
+                "x": -74.07217153126875,
+                "y": 40.7331188842168
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 22,
+                "MJR_RD": "Baldwin Ave",
+                "MNR_RD": "Court House Pl",
+                "Units": "2"
+            },
+            "geometry": {
+                "x": -74.05590026304353,
+                "y": 40.732157824978245
+            }
+        }
+    ]
+}
