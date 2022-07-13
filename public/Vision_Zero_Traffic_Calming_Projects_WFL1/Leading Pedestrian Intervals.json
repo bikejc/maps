@@ -1,0 +1,175 @@
+{
+    "objectIdFieldName": "OBJECTID",
+    "uniqueIdField": {
+        "name": "OBJECTID",
+        "isSystemMaintained": true
+    },
+    "globalIdFieldName": "",
+    "geometryType": "esriGeometryPoint",
+    "spatialReference": {
+        "wkid": 4326,
+        "latestWkid": 4326
+    },
+    "fields": [
+        {
+            "name": "OBJECTID",
+            "type": "esriFieldTypeOID",
+            "alias": "OBJECTID",
+            "sqlType": "sqlTypeOther",
+            "domain": null,
+            "defaultValue": null
+        },
+        {
+            "name": "Major_St",
+            "type": "esriFieldTypeString",
+            "alias": "Major_St",
+            "sqlType": "sqlTypeOther",
+            "length": 255,
+            "domain": null,
+            "defaultValue": null
+        },
+        {
+            "name": "Minor_St",
+            "type": "esriFieldTypeString",
+            "alias": "Minor_St",
+            "sqlType": "sqlTypeOther",
+            "length": 255,
+            "domain": null,
+            "defaultValue": null
+        }
+    ],
+    "features": [
+        {
+            "attributes": {
+                "OBJECTID": 1,
+                "Major_St": "Columbus Dr",
+                "Minor_St": "Barrow St"
+            },
+            "geometry": {
+                "x": -74.04509950532254,
+                "y": 40.720220524998616
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 2,
+                "Major_St": "Columbus Dr",
+                "Minor_St": "Brunswick St"
+            },
+            "geometry": {
+                "x": -74.05135608483472,
+                "y": 40.721960955050235
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 3,
+                "Major_St": "Columbus Dr",
+                "Minor_St": "Grove St"
+            },
+            "geometry": {
+                "x": -74.04303517935384,
+                "y": 40.71953776667818
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 4,
+                "Major_St": "Columbus Dr",
+                "Minor_St": "Jersey Ave"
+            },
+            "geometry": {
+                "x": -74.04664683697426,
+                "y": 40.72068794218883
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 5,
+                "Major_St": "Columbus Dr",
+                "Minor_St": "Marin Blvd"
+            },
+            "geometry": {
+                "x": -74.04133562707885,
+                "y": 40.71902239985548
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 6,
+                "Major_St": "Columbus Dr",
+                "Minor_St": "Monmouth St"
+            },
+            "geometry": {
+                "x": -74.04973765967028,
+                "y": 40.7216413028925
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 7,
+                "Major_St": "Columbus Dr",
+                "Minor_St": "Varick St / Coles St"
+            },
+            "geometry": {
+                "x": -74.04818407307455,
+                "y": 40.72115082496722
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 8,
+                "Major_St": "Columbus Dr",
+                "Minor_St": "Warren St"
+            },
+            "geometry": {
+                "x": -74.03883293328731,
+                "y": 40.71824524900696
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 9,
+                "Major_St": "Columbus Dr",
+                "Minor_St": "Washington St"
+            },
+            "geometry": {
+                "x": -74.03722492789511,
+                "y": 40.717735484624036
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 10,
+                "Major_St": "Columbus Dr",
+                "Minor_St": "Greene St"
+            },
+            "geometry": {
+                "x": -74.03559147255741,
+                "y": 40.71731263781983
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 11,
+                "Major_St": "Greene St",
+                "Minor_St": "Morgan St"
+            },
+            "geometry": {
+                "x": -74.03522386707746,
+                "y": 40.719392593703525
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 12,
+                "Major_St": "Marin Blvd",
+                "Minor_St": "Metro Plaza"
+            },
+            "geometry": {
+                "x": -74.05407598865229,
+                "y": 40.71199539629932
+            }
+        }
+    ]
+}

@@ -2,12 +2,13 @@ import Head from 'next/head';
 import fs from 'fs'
 import path from 'path'
 import css from './index.module.scss'
+import { XMLParser } from 'fast-xml-parser'
 
 import Map from '../components/Map';
 
 import styles from '../../styles/Home.module.css';
 
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useMemo, useReducer, useState} from "react";
 
 const DEFAULT_CENTER = [40.720, -74.066]
 const DEFAULT_ZOOM = 13
@@ -57,15 +58,27 @@ const MAPS = {
 
 const dataUrls = {
     'roads': 'Roads_Jersey_City.json',
+    'lur': 'light-up-route-20220708.gpx',
+    'citibike': 'JC_Citi_Bike_Locations.json',
+    'HIN': 'Vision_Zero_Traffic_Calming_Projects_WFL1/Merged_HIN.json',
 }
 
-const layerOrder = [ 'wards', 'roads', 'bikeLanes', ]
+const layerInfos = [
+    { label: "Bike Lanes", key: "bikeLanes", },
+    { label: "Roads", key: "roads", },
+    { label: "Wards", key: "wards", },
+    { label: "Citi Bike Docks", key: "citibike", },
+    { label: "High Injury Network", key: "HIN", },
+    // { label: "Light-Up Ride 7/8/22", key: "lur"},
+]
 
-function MapLayer({ TileLayer, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, }) {
+const layerOrder = [ 'wards', 'roads', 'bikeLanes', 'citibike', ]
+
+function MapLayer({ TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, }) {
     const wardsLayer = () => {
         const rank = activeLayerIndices['wards']
         return (
-            fetchedLayers['wards'].map(({attributes, geometry}) => {
+            fetchedLayers['wards']?.map(({attributes, geometry}) => {
                 const wardId = attributes['NAME']
                 const ward = wardInfos[wardId]
                 const color = ward.color
@@ -112,11 +125,47 @@ function MapLayer({ TileLayer, Polygon, Polyline, ZoomControl, Popup, Tooltip, a
         )
     }
 
+    const lurLayer = () => {
+        const positions = fetchedLayers['lur']
+        return positions && <Polyline color={"red"} key={"lur"} positions={positions} />
+    }
+
+    const citibikeLayer = () => {
+        const rank = activeLayerIndices['citibike']
+        return (
+            fetchedLayers['citibike']?.map(({ attributes, geometry }) => {
+                let { OBJECTID, Location: name, StationID, } = attributes
+                const position = [ geometry.y, geometry.x ]
+                const key = `${OBJECTID}_rank${rank}`
+                return (
+                    <Circle key={key} center={position} color={"lightblue"} radius={15}>
+                        <Tooltip sticky={true}>
+                            {name} ({StationID})
+                        </Tooltip>
+                    </Circle>
+                )
+            })
+        )
+    }
+
+    const hinLayer = () => {
+        const rank = activeLayerIndices['HIN']
+        return (
+            fetchedLayers['HIN']?.map(({ geometry }) => {
+                return geometry.paths.map((path, idx) => {
+                    return (
+                        <Polyline key={`HIN_${idx}_rank${rank}`} positions={path.map(([ lon, lat ]) => [ lat, lon ])} color={"orange"} />
+                    )
+                })
+            })
+        )
+    }
+
     const bikeLanesLayer = () => {
         const rank = activeLayerIndices['bikeLanes']
         return (
-            fetchedLayers['bikeLanes'].map(({ attributes, geometry }) => {
-                let { OBJECTID, Street_Name: name, Type, Surface_Treatment: surface, Status: status, } = attributes
+            fetchedLayers['bikeLanes']?.map(({ attributes, geometry }) => {
+                let { OBJECTID, Street_Name: name, Type, Status: status, } = attributes
                 name = name || attributes.StreetName
                 const type = (status === 'PLANNED') ? `PLANNED ${Type}` : Type
                 if (type !== 'PROTECTED BIKE LANE' && type !== 'PLANNED PROTECTED BIKE LANE') return
@@ -146,17 +195,55 @@ function MapLayer({ TileLayer, Polygon, Polyline, ZoomControl, Popup, Tooltip, a
             {('wards' in fetchedLayers) && activeLayers.includes('wards') && wardsLayer()}
             {('roads' in fetchedLayers) && activeLayers.includes('roads') && roadsLayer()}
             {('bikeLanes' in fetchedLayers) && activeLayers.includes('bikeLanes') && bikeLanesLayer()}
+            {('citibike' in fetchedLayers) && activeLayers.includes('citibike') && citibikeLayer()}
+            {('HIN' in fetchedLayers) && activeLayers.includes('HIN') && hinLayer()}
+            {('lur' in fetchedLayers) && activeLayers.includes('lur') && lurLayer()}
             {/*<ZoomControl position="bottomleft" />*/}
         </>
     )
 }
 
+const useSet = initialValue => {
+    const [set, setSet] = useState(new Set(initialValue));
+
+    const actions = useMemo(
+        () => ({
+            add: item => setSet(prevSet => new Set([...prevSet, item])),
+            remove: item =>
+                setSet(prevSet => new Set([...prevSet].filter(i => i !== item))),
+            clear: () => setSet(new Set()),
+        }),
+        [setSet]
+    );
+
+    return [set, actions];
+}
+
 export default function Home({ layers, }) {
-    const [ rawActiveLayers, setActiveLayers ] = useState(new Set([ 'wards', 'bikeLanes', ]))
+    const [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ] = useSet([ 'wards', 'bikeLanes', 'citibike', /*'HIN'*/ ])
     let activeLayers = Array.from(rawActiveLayers).map(k => [ layerOrder.indexOf(k), k ]).sort(([ l ], [ r ]) => l - r).map(([ _, k ]) => k)
 
-    const [ fetchedLayers, setFetchedLayers ] = useState(layers)
+    const [ fetchedLayers, addFetchedLayer ] = useReducer(
+        (layers, [ k, layer ]) => {
+            if (k in layers) {
+                if (layer[k]) {
+                    console.warn(`fetchLayers: duplicate add ${k}`)
+                    return layers
+                } else {
+                    console.log(`fetchLayers: updating ${k}: ${layer}`)
+                    return Object.fromEntries(Object.entries(layers).map(([ key, val ]) => key === k ? [ key, layer ] : [ key, val ]))
+                }
+            } else {
+                console.log(`fetchLayers: setting ${k}: ${layer}`)
+                const newLayers = { ...layers }
+                newLayers[k] = layer
+                return newLayers
+            }
+        },
+        layers
+    )
 
+    console.log("render: fetchedLayers:", fetchedLayers)
     const activeLayerIndices = useMemo(() => Object.fromEntries(activeLayers.filter(k => k in fetchedLayers).map((k, idx) => [ k, idx ])), [ fetchedLayers, activeLayers, ])
 
     const [ showSettings, setShowSettings ] = useState(false)
@@ -184,21 +271,39 @@ export default function Home({ layers, }) {
     }, [ activeLayers ])
 
     useEffect(() => {
-        if (!href) return
         const fetchLayer = async (k) => {
-            if (k in fetchedLayers) return Promise.resolve()
+            if (!href) return Promise.resolve()
+            if (k in fetchedLayers) {
+                if (fetchedLayers[k]) {
+                    console.log(`${k}: already fetched`)
+                } else {
+                    console.log(`${k}: currently fetching`)
+                }
+                return Promise.resolve()
+            }
+            addFetchedLayer([ k, null ])
             const path = dataUrls[k]
             const url = `${href}/${path}`
             console.log(`fetching layer: ${k}`)
             const res = await fetch(url)
             console.log(`fetched layer: ${k}`)
-            const json = await res.json()
-            const features = json['features']
-            layers[k] = features
-            const newLayers = { ...layers }
-            newLayers[k] = features
-            setFetchedLayers(newLayers)
-            setActiveLayers(new Set([ ...activeLayers, k, ]))
+            let newLayer
+            if (k === 'lur') {
+                const buf = await res.text()
+                const parserOpts = { ignoreAttributes: false }
+                const parser = new XMLParser(parserOpts)
+                const obj = parser.parse(buf)
+                const pts = obj.gpx.trk.trkseg.trkpt
+                const positions = pts.map(pt => [ parseFloat(pt['@_lat']), parseFloat(pt['@_lon']), ])
+                newLayer = positions
+                console.log("got gpx positions:", positions)
+            } else {
+                const json = await res.json()
+                newLayer = json['features']
+                console.log(`layer ${k}:`, newLayer)
+            }
+            addFetchedLayer([ k, newLayer ])
+            addActiveLayer(k)
             return Promise.resolve()
         }
 
@@ -209,7 +314,7 @@ export default function Home({ layers, }) {
         <div className={styles.container}>
             <Head>
                 <title>{title}</title>
-                <link rel="icon" href="/maps/favicon.ico" />
+                <link rel="icon" href="./favicon.ico" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
                 <meta name="twitter:card" content="summary" key="twcard" />
@@ -237,11 +342,7 @@ export default function Home({ layers, }) {
                             <div className={css.menu}>
                                 <ul className={css.layers}>
                                     {
-                                        [
-                                            { label: "Bike Lanes", key: "bikeLanes"},
-                                            { label: "Roads", key: "roads"},
-                                            { label: "Wards", key: "wards"},
-                                        ].map(({ label, key, }) => {
+                                        layerInfos.map(({ label, key, }) => {
                                             const active = activeLayers.includes(key)
                                             function onChange(e) {
                                                 const checked = e.target.checked
@@ -249,9 +350,9 @@ export default function Home({ layers, }) {
                                                     console.error(`layer ${key}: checked ${checked} != active ${active}`)
                                                 }
                                                 if (checked) {
-                                                    setActiveLayers([ ...activeLayers, key ])
+                                                    addActiveLayer(key)
                                                 } else {
-                                                    setActiveLayers(activeLayers.filter(k => k !== key))
+                                                    removeActiveLayer(key)
                                                 }
                                             }
                                             return <li key={key}><label><input type={"checkbox"} onChange={onChange} checked={active} />{label}</label></li>
@@ -259,8 +360,8 @@ export default function Home({ layers, }) {
                                     }
                                 </ul>
                                 <div className={css.icons}>
-                                    <a href={"https://github.com/bikejc/maps"}><img className={css.icon} src={"./gh.png"} /></a>
-                                    <a href={"https://bikejc.org"}><img className={css.icon} src={"./logo.png"} /></a>
+                                    <a href={"https://github.com/bikejc/maps"}><img alt={"GitHub logo"} className={css.icon} src={"./gh.png"} /></a>
+                                    <a href={"https://bikejc.org"}><img alt={"Bike JC logo"} className={css.icon} src={"./logo.png"} /></a>
                                 </div>
                             </div>
                         }

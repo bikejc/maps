@@ -1,0 +1,626 @@
+{
+  "objectIdFieldName": "OBJECTID",
+  "uniqueIdField": {
+    "name": "OBJECTID",
+    "isSystemMaintained": true
+  },
+  "globalIdFieldName": "",
+  "geometryType": "esriGeometryPoint",
+  "spatialReference": {
+    "wkid": 4326,
+    "latestWkid": 4326
+  },
+  "fields": [
+    {
+      "name": "OBJECTID",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "sqlType": "sqlTypeOther",
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "Location",
+      "type": "esriFieldTypeString",
+      "alias": "Location",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    },
+    {
+      "name": "StationID",
+      "type": "esriFieldTypeString",
+      "alias": "StationID",
+      "sqlType": "sqlTypeOther",
+      "length": 255,
+      "domain": null,
+      "defaultValue": null
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "OBJECTID": 1,
+        "Location": "Morris Canal (Inactive)",
+        "StationID": "JC072"
+      },
+      "geometry": {
+        "x": -74.03840779286715,
+        "y": 40.712455866317285
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 2,
+        "Location": "Essex Light Rail",
+        "StationID": "JC038"
+      },
+      "geometry": {
+        "x": -74.03650703670257,
+        "y": 40.71283058051419
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 3,
+        "Location": "Marin Light Rail",
+        "StationID": "JC013"
+      },
+      "geometry": {
+        "x": -74.04290105820694,
+        "y": 40.71459585037649
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 4,
+        "Location": "Paulus Hook",
+        "StationID": "JC002"
+      },
+      "geometry": {
+        "x": -74.03342146514494,
+        "y": 40.71415537879912
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 5,
+        "Location": "Grand St",
+        "StationID": "JC102"
+      },
+      "geometry": {
+        "x": -74.03766643711936,
+        "y": 40.715264356512385
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 6,
+        "Location": "JC Medical Center",
+        "StationID": "JC011"
+      },
+      "geometry": {
+        "x": -74.04926146664214,
+        "y": 40.716560014557295
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 7,
+        "Location": "York St",
+        "StationID": "JC096"
+      },
+      "geometry": {
+        "x": -74.04094686114696,
+        "y": 40.71647886944267
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 8,
+        "Location": "City Hall",
+        "StationID": "JC003"
+      },
+      "geometry": {
+        "x": -74.04391944304683,
+        "y": 40.71773057087484
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 9,
+        "Location": "Van Vorst Park",
+        "StationID": "JC035"
+      },
+      "geometry": {
+        "x": -74.04777305131334,
+        "y": 40.71854913548973
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 10,
+        "Location": "Montgomery St",
+        "StationID": "JC099"
+      },
+      "geometry": {
+        "x": -74.05094526968594,
+        "y": 40.71948047163754
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 11,
+        "Location": "Columbus Dr at Exchange Pl",
+        "StationID": "JC106"
+      },
+      "geometry": {
+        "x": -74.03271889535492,
+        "y": 40.71684889606326
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 12,
+        "Location": "Columbus Drive",
+        "StationID": "JC014"
+      },
+      "geometry": {
+        "x": -74.03891722828277,
+        "y": 40.71832242708098
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 13,
+        "Location": "Grove St PATH",
+        "StationID": "JC005"
+      },
+      "geometry": {
+        "x": -74.04308195162383,
+        "y": 40.719609174354304
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 14,
+        "Location": "Dixon Mills",
+        "StationID": "JC076"
+      },
+      "geometry": {
+        "x": -74.04991629443835,
+        "y": 40.72164538127223
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 15,
+        "Location": "Newark Ave",
+        "StationID": "JC032"
+      },
+      "geometry": {
+        "x": -74.04619876422949,
+        "y": 40.721530584981316
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 16,
+        "Location": "Manila & 1st",
+        "StationID": "JC082"
+      },
+      "geometry": {
+        "x": -74.04276880484875,
+        "y": 40.721653315862646
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 17,
+        "Location": "Warren St",
+        "StationID": "JC006"
+      },
+      "geometry": {
+        "x": -74.03811762361268,
+        "y": 40.7211766823754
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 18,
+        "Location": "Harborside",
+        "StationID": "JC104"
+      },
+      "geometry": {
+        "x": -74.03423749991164,
+        "y": 40.71925521766299
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 19,
+        "Location": "Jersey & 3rd",
+        "StationID": "JC074"
+      },
+      "geometry": {
+        "x": -74.04589736091305,
+        "y": 40.72332633943619
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 20,
+        "Location": "Jersey & 6th St",
+        "StationID": "JC027"
+      },
+      "geometry": {
+        "x": -74.0455636828073,
+        "y": 40.72528521408437
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 21,
+        "Location": "Brunswick St",
+        "StationID": "JC023"
+      },
+      "geometry": {
+        "x": -74.0506626276271,
+        "y": 40.724144167223315
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 22,
+        "Location": "Brunswick & 6th",
+        "StationID": "JC081"
+      },
+      "geometry": {
+        "x": -74.05037261012126,
+        "y": 40.72602271536353
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 23,
+        "Location": "Monmouth and 6th",
+        "StationID": "JC075"
+      },
+      "geometry": {
+        "x": -74.04886716261719,
+        "y": 40.72569398535828
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 24,
+        "Location": "Washington St",
+        "StationID": "JC098"
+      },
+      "geometry": {
+        "x": -74.0353466725654,
+        "y": 40.72434892570399
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 25,
+        "Location": "Hamilton Park",
+        "StationID": "JC009"
+      },
+      "geometry": {
+        "x": -74.04417231044974,
+        "y": 40.72758572181766
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 26,
+        "Location": "Newport PATH",
+        "StationID": "JC066"
+      },
+      "geometry": {
+        "x": -74.03377350460214,
+        "y": 40.727147354564885
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 27,
+        "Location": "Newport Pkwy",
+        "StationID": "JC008"
+      },
+      "geometry": {
+        "x": -74.03200986892037,
+        "y": 40.72873505874858
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 28,
+        "Location": "Hoboken Ave at Monmouth St",
+        "StationID": "JC105"
+      },
+      "geometry": {
+        "x": -74.04671092225873,
+        "y": 40.73546215701912
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 29,
+        "Location": "Liberty Light Rail",
+        "StationID": "JC052"
+      },
+      "geometry": {
+        "x": -74.05569704164584,
+        "y": 40.71127314211511
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 30,
+        "Location": "Lafayette Park (Inactive)",
+        "StationID": "JC078"
+      },
+      "geometry": {
+        "x": -74.0628496636317,
+        "y": 40.71352034846953
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 31,
+        "Location": "Communipaw & Berry Lane",
+        "StationID": "JC084"
+      },
+      "geometry": {
+        "x": -74.06659154859089,
+        "y": 40.71440784388086
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 32,
+        "Location": "Jackson Square",
+        "StationID": "JC063"
+      },
+      "geometry": {
+        "x": -74.07893669135802,
+        "y": 40.711076133326685
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 33,
+        "Location": "Union St",
+        "StationID": "JC051"
+      },
+      "geometry": {
+        "x": -74.08375123974172,
+        "y": 40.7182440320432
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 34,
+        "Location": "Astor Place",
+        "StationID": "JC077"
+      },
+      "geometry": {
+        "x": -74.071263757242,
+        "y": 40.719352184316065
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 35,
+        "Location": "Bergen Ave",
+        "StationID": "JC095"
+      },
+      "geometry": {
+        "x": -74.07152619250776,
+        "y": 40.72215880186905
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 36,
+        "Location": "Lincoln Park",
+        "StationID": "JC053"
+      },
+      "geometry": {
+        "x": -74.07835966857127,
+        "y": 40.72456689088568
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 37,
+        "Location": "Fairmount Ave",
+        "StationID": "JC093"
+      },
+      "geometry": {
+        "x": -74.07219304537576,
+        "y": 40.72583810571979
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 38,
+        "Location": "McGinley Square",
+        "StationID": "JC055"
+      },
+      "geometry": {
+        "x": -74.0676091565964,
+        "y": 40.725366389551525
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 39,
+        "Location": "Baldwin at Montgomery",
+        "StationID": "JC020"
+      },
+      "geometry": {
+        "x": -74.06417436609854,
+        "y": 40.72372644542838
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 40,
+        "Location": "Glenwood Ave",
+        "StationID": "JC094"
+      },
+      "geometry": {
+        "x": -74.0708811997595,
+        "y": 40.727523895813704
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 41,
+        "Location": "Sip Ave",
+        "StationID": "JC056"
+      },
+      "geometry": {
+        "x": -74.06418922991041,
+        "y": 40.73089512950666
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 42,
+        "Location": "Hilltop",
+        "StationID": "JC019"
+      },
+      "geometry": {
+        "x": -74.05750340518708,
+        "y": 40.73106728799445
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 43,
+        "Location": "Journal Square",
+        "StationID": "JC103"
+      },
+      "geometry": {
+        "x": -74.06277440425407,
+        "y": 40.733760112742615
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 44,
+        "Location": "5 Corners Library",
+        "StationID": "JC018"
+      },
+      "geometry": {
+        "x": -74.05933750781776,
+        "y": 40.73493158442374
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 45,
+        "Location": "Dey St",
+        "StationID": "JC065"
+      },
+      "geometry": {
+        "x": -74.06709579331607,
+        "y": 40.737771063925365
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 46,
+        "Location": "Christ Hospital",
+        "StationID": "JC034"
+      },
+      "geometry": {
+        "x": -74.05034615584303,
+        "y": 40.73469792648765
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 47,
+        "Location": "Oakland Ave",
+        "StationID": "JC022"
+      },
+      "geometry": {
+        "x": -74.05254502317655,
+        "y": 40.73769374990213
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 48,
+        "Location": "Pershing Field",
+        "StationID": "JC024"
+      },
+      "geometry": {
+        "x": -74.05163809110623,
+        "y": 40.74277543738821
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 49,
+        "Location": "Leonard Gordon Park",
+        "StationID": "JC080"
+      },
+      "geometry": {
+        "x": -74.05732060852573,
+        "y": 40.74596448773369
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 50,
+        "Location": "Riverview Park",
+        "StationID": "JC057"
+      },
+      "geometry": {
+        "x": -74.04399282756549,
+        "y": 40.744392372162764
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 51,
+        "Location": "Heights Elevator",
+        "StationID": "JC059"
+      },
+      "geometry": {
+        "x": -74.04043358220068,
+        "y": 40.74872782436404
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 52,
+        "Location": "Bergen Ave & Stegman St",
+        "StationID": "JC108"
+      },
+      "geometry": {
+        "x": -74.08675368357997,
+        "y": 40.7065361799394
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 53,
+        "Location": "Grant Ave & MLK Dr",
+        "StationID": "JC107"
+      },
+      "geometry": {
+        "x": -74.08090810444853,
+        "y": 40.70924819656302
+      }
+    }
+  ]
+}

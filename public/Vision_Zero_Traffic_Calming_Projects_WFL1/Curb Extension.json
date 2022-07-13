@@ -1,0 +1,1033 @@
+{
+    "objectIdFieldName": "OBJECTID",
+    "uniqueIdField": {
+        "name": "OBJECTID",
+        "isSystemMaintained": true
+    },
+    "globalIdFieldName": "",
+    "geometryType": "esriGeometryPoint",
+    "spatialReference": {
+        "wkid": 4326,
+        "latestWkid": 4326
+    },
+    "fields": [
+        {
+            "name": "OBJECTID",
+            "type": "esriFieldTypeOID",
+            "alias": "OBJECTID",
+            "sqlType": "sqlTypeOther",
+            "domain": null,
+            "defaultValue": null
+        },
+        {
+            "name": "MJR_RD",
+            "type": "esriFieldTypeString",
+            "alias": "MJR_RD",
+            "sqlType": "sqlTypeOther",
+            "length": 255,
+            "domain": null,
+            "defaultValue": null
+        },
+        {
+            "name": "MNR_RD",
+            "type": "esriFieldTypeString",
+            "alias": "MNR_RD",
+            "sqlType": "sqlTypeOther",
+            "length": 255,
+            "domain": null,
+            "defaultValue": null
+        }
+    ],
+    "features": [
+        {
+            "attributes": {
+                "OBJECTID": 1,
+                "MJR_RD": "Ocean Ave",
+                "MNR_RD": "Danforth Ave"
+            },
+            "geometry": {
+                "x": -74.09071794637524,
+                "y": 40.69565301012733
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 2,
+                "MJR_RD": "Garfield Ave",
+                "MNR_RD": "Van Nostrand Ave"
+            },
+            "geometry": {
+                "x": -74.08274028302085,
+                "y": 40.69821880334059
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 3,
+                "MJR_RD": "Garfield Ave",
+                "MNR_RD": "Pearsall Ave"
+            },
+            "geometry": {
+                "x": -74.09171823470538,
+                "y": 40.6919544048804
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 4,
+                "MJR_RD": "Garfield Ave",
+                "MNR_RD": "Stegman St"
+            },
+            "geometry": {
+                "x": -74.07860934089342,
+                "y": 40.700983341779164
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 5,
+                "MJR_RD": "Ocean Ave",
+                "MNR_RD": "Cator Ave"
+            },
+            "geometry": {
+                "x": -74.0898395423636,
+                "y": 40.6960976096802
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 6,
+                "MJR_RD": "Ocean Ave",
+                "MNR_RD": "Fulton Ave"
+            },
+            "geometry": {
+                "x": -74.0823696346288,
+                "y": 40.70170404945403
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 7,
+                "MJR_RD": "West Side Ave",
+                "MNR_RD": "Fulton Ave"
+            },
+            "geometry": {
+                "x": -74.09469672692958,
+                "y": 40.70979026879276
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 8,
+                "MJR_RD": "West Side Ave",
+                "MNR_RD": "Sip Ave"
+            },
+            "geometry": {
+                "x": -74.07260773431663,
+                "y": 40.73244001204062
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 9,
+                "MJR_RD": "West Side Ave",
+                "MNR_RD": "Kensington Ave"
+            },
+            "geometry": {
+                "x": -74.07825674960553,
+                "y": 40.72449547340414
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 10,
+                "MJR_RD": "Communipaw Ave",
+                "MNR_RD": "West Side Ave"
+            },
+            "geometry": {
+                "x": -74.08134375378793,
+                "y": 40.720895699688015
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 11,
+                "MJR_RD": "West Side Ave",
+                "MNR_RD": "Harrison Ave"
+            },
+            "geometry": {
+                "x": -74.08068903063757,
+                "y": 40.72177593043855
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 12,
+                "MJR_RD": "Bergen Ave",
+                "MNR_RD": "Vroom St"
+            },
+            "geometry": {
+                "x": -74.06691783334622,
+                "y": 40.728485854699095
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 13,
+                "MJR_RD": "St Pauls Ave",
+                "MNR_RD": "Liberty Ave"
+            },
+            "geometry": {
+                "x": -74.06459668786404,
+                "y": 40.73774033689994
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 14,
+                "MJR_RD": "St Pauls Ave",
+                "MNR_RD": "Oakland Ave"
+            },
+            "geometry": {
+                "x": -74.05474870962179,
+                "y": 40.73540122215153
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 15,
+                "MJR_RD": "Palisade Ave",
+                "MNR_RD": "Fleet St"
+            },
+            "geometry": {
+                "x": -74.05147006280963,
+                "y": 40.73280258740899
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 16,
+                "MJR_RD": "Sip Ave",
+                "MNR_RD": "Bergen Ave"
+            },
+            "geometry": {
+                "x": -74.06437552382141,
+                "y": 40.73087799380434
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 17,
+                "MJR_RD": "Summit Ave",
+                "MNR_RD": "Sip Ave"
+            },
+            "geometry": {
+                "x": -74.0612697553192,
+                "y": 40.73043246607875
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 18,
+                "MJR_RD": "Summit Ave",
+                "MNR_RD": "Vroom St"
+            },
+            "geometry": {
+                "x": -74.0639160619724,
+                "y": 40.72658606104199
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 19,
+                "MJR_RD": "Central Ave",
+                "MNR_RD": "Congress St"
+            },
+            "geometry": {
+                "x": -74.04606086411363,
+                "y": 40.75084516056509
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 20,
+                "MJR_RD": "Central Ave",
+                "MNR_RD": "Franklin St"
+            },
+            "geometry": {
+                "x": -74.051236866186,
+                "y": 40.74332683039539
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 21,
+                "MJR_RD": "Central Ave",
+                "MNR_RD": "Congress St"
+            },
+            "geometry": {
+                "x": -74.04597393580454,
+                "y": 40.750982874364766
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 22,
+                "MJR_RD": "Congress St",
+                "MNR_RD": "New York Ave"
+            },
+            "geometry": {
+                "x": -74.04195437835845,
+                "y": 40.74931476224435
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 23,
+                "MJR_RD": "Nelson Ave",
+                "MNR_RD": "Hague St"
+            },
+            "geometry": {
+                "x": -74.04930229063959,
+                "y": 40.757869150407
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 24,
+                "MJR_RD": "Summit Ave",
+                "MNR_RD": "Congress St"
+            },
+            "geometry": {
+                "x": -74.04835868481688,
+                "y": 40.751923254894095
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 25,
+                "MJR_RD": "Summit Ave",
+                "MNR_RD": "Hutton St"
+            },
+            "geometry": {
+                "x": -74.05268740975625,
+                "y": 40.745665859359534
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 26,
+                "MJR_RD": "18th St",
+                "MNR_RD": "Marin Blvd"
+            },
+            "geometry": {
+                "x": -74.03903677951433,
+                "y": 40.73423661088317
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 27,
+                "MJR_RD": "Erie St",
+                "MNR_RD": "5th St"
+            },
+            "geometry": {
+                "x": -74.04387437820185,
+                "y": 40.72466589060552
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 28,
+                "MJR_RD": "Greene St",
+                "MNR_RD": "Bay St"
+            },
+            "geometry": {
+                "x": -74.03507489722638,
+                "y": 40.7200957506821
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 29,
+                "MJR_RD": "Greene St",
+                "MNR_RD": "Columbus Dr"
+            },
+            "geometry": {
+                "x": -74.03558159522426,
+                "y": 40.717299509754646
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 30,
+                "MJR_RD": "Greene St",
+                "MNR_RD": "Montgomery St"
+            },
+            "geometry": {
+                "x": -74.03571986363987,
+                "y": 40.71662553119123
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 31,
+                "MJR_RD": "Greene St",
+                "MNR_RD": "Pearl St"
+            },
+            "geometry": {
+                "x": -74.0354426804394,
+                "y": 40.71806588816435
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 32,
+                "MJR_RD": "Grand St",
+                "MNR_RD": "Barrow St"
+            },
+            "geometry": {
+                "x": -74.04712506401715,
+                "y": 40.71634743235607
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 33,
+                "MJR_RD": "Grand St",
+                "MNR_RD": "Grove St"
+            },
+            "geometry": {
+                "x": -74.04490420877795,
+                "y": 40.71612617333207
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 34,
+                "MJR_RD": "Grand St",
+                "MNR_RD": "Jersey Ave"
+            },
+            "geometry": {
+                "x": -74.04889673993473,
+                "y": 40.716548414033426
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 35,
+                "MJR_RD": "Grand St",
+                "MNR_RD": "Marin Blvd"
+            },
+            "geometry": {
+                "x": -74.04267147686005,
+                "y": 40.71586786416233
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 36,
+                "MJR_RD": "Grand St",
+                "MNR_RD": "Washington St"
+            },
+            "geometry": {
+                "x": -74.03769623050886,
+                "y": 40.71532135464774
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 37,
+                "MJR_RD": "Grove St",
+                "MNR_RD": "Montgomery St"
+            },
+            "geometry": {
+                "x": -74.04416600705181,
+                "y": 40.71752777193587
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 38,
+                "MJR_RD": "Grove St",
+                "MNR_RD": "York St"
+            },
+            "geometry": {
+                "x": -74.04448628402189,
+                "y": 40.71686374144382
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 39,
+                "MJR_RD": "Jersey Ave",
+                "MNR_RD": "3rd St"
+            },
+            "geometry": {
+                "x": -74.04580211723197,
+                "y": 40.72338326583587
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 40,
+                "MJR_RD": "Jersey Ave",
+                "MNR_RD": "6th St"
+            },
+            "geometry": {
+                "x": -74.04544734751745,
+                "y": 40.725544074448784
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 41,
+                "MJR_RD": "Jersey Ave",
+                "MNR_RD": "Bright St"
+            },
+            "geometry": {
+                "x": -74.0485151016286,
+                "y": 40.71731385881135
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 42,
+                "MJR_RD": "Jersey Ave",
+                "MNR_RD": "York St"
+            },
+            "geometry": {
+                "x": -74.048134016815,
+                "y": 40.71799614265321
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 43,
+                "MJR_RD": "Manila Ave",
+                "MNR_RD": "6th St"
+            },
+            "geometry": {
+                "x": -74.04210964219868,
+                "y": 40.72519823622608
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 44,
+                "MJR_RD": "Monmouth St",
+                "MNR_RD": "7th St"
+            },
+            "geometry": {
+                "x": -74.04868386598955,
+                "y": 40.72649003293907
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 45,
+                "MJR_RD": "Monmouth St",
+                "MNR_RD": "9th St"
+            },
+            "geometry": {
+                "x": -74.04831652634483,
+                "y": 40.72872472166978
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 46,
+                "MJR_RD": "Montgomery St",
+                "MNR_RD": "Warren St"
+            },
+            "geometry": {
+                "x": -74.03910568112931,
+                "y": 40.71697174704958
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 47,
+                "MJR_RD": "Montgomery St",
+                "MNR_RD": "Washington St"
+            },
+            "geometry": {
+                "x": -74.03740669605443,
+                "y": 40.71679862763142
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 48,
+                "MJR_RD": "Newark Ave",
+                "MNR_RD": "2nd St"
+            },
+            "geometry": {
+                "x": -74.04868385592803,
+                "y": 40.72289559892135
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 49,
+                "MJR_RD": "Warren St",
+                "MNR_RD": "Morgan St"
+            },
+            "geometry": {
+                "x": -74.0385034427785,
+                "y": 40.71976912138217
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 50,
+                "MJR_RD": "Washington St",
+                "MNR_RD": "4th St"
+            },
+            "geometry": {
+                "x": -74.03619786000277,
+                "y": 40.72299394899966
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 51,
+                "MJR_RD": "Washington St",
+                "MNR_RD": "14th St"
+            },
+            "geometry": {
+                "x": -74.03434380285998,
+                "y": 40.731108606684714
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 52,
+                "MJR_RD": "Washington St",
+                "MNR_RD": "Morgan St"
+            },
+            "geometry": {
+                "x": -74.03684082196227,
+                "y": 40.719596138995634
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 53,
+                "MJR_RD": "Washington St",
+                "MNR_RD": "Thomas Gangemi Dr"
+            },
+            "geometry": {
+                "x": -74.03581825502894,
+                "y": 40.72442505167413
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 54,
+                "MJR_RD": "Washington St",
+                "MNR_RD": "Newport Pkwy"
+            },
+            "geometry": {
+                "x": -74.03467943423102,
+                "y": 40.729337501371305
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 55,
+                "MJR_RD": "Washington St",
+                "MNR_RD": "North Garage Driveway"
+            },
+            "geometry": {
+                "x": -74.03455319813357,
+                "y": 40.728261509264215
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 56,
+                "MJR_RD": "Washington St",
+                "MNR_RD": "Pearl St"
+            },
+            "geometry": {
+                "x": -74.03711322940133,
+                "y": 40.71828068839228
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 57,
+                "MJR_RD": "Washington St",
+                "MNR_RD": "2nd St"
+            },
+            "geometry": {
+                "x": -74.0363500470512,
+                "y": 40.721855429312434
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 58,
+                "MJR_RD": "Washington St",
+                "MNR_RD": "South Garage Driveway"
+            },
+            "geometry": {
+                "x": -74.03553608564432,
+                "y": 40.72534422396001
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 59,
+                "MJR_RD": "Washington St",
+                "MNR_RD": "Target Entrance"
+            },
+            "geometry": {
+                "x": -74.03410915380525,
+                "y": 40.73212321889008
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 60,
+                "MJR_RD": "Bright St",
+                "MNR_RD": "Merseles St"
+            },
+            "geometry": {
+                "x": -74.05593390279782,
+                "y": 40.71961920253508
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 61,
+                "MJR_RD": "Columbus Dr",
+                "MNR_RD": "Brunswick St"
+            },
+            "geometry": {
+                "x": -74.05136003848553,
+                "y": 40.72195795252874
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 62,
+                "MJR_RD": "Garfield Ave",
+                "MNR_RD": "Bramhall Ave"
+            },
+            "geometry": {
+                "x": -74.06889488284888,
+                "y": 40.71212905953958
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 63,
+                "MJR_RD": "Garfield Ave",
+                "MNR_RD": "Union St"
+            },
+            "geometry": {
+                "x": -74.0698539974483,
+                "y": 40.71093714862101
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 64,
+                "MJR_RD": "Grand St",
+                "MNR_RD": "Monmouth St"
+            },
+            "geometry": {
+                "x": -74.05230520897481,
+                "y": 40.716941409879766
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 65,
+                "MJR_RD": "Martin Luther King Dr",
+                "MNR_RD": "Oak St"
+            },
+            "geometry": {
+                "x": -74.07650042724508,
+                "y": 40.71356093785736
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 66,
+                "MJR_RD": "Martin Luther King Dr",
+                "MNR_RD": "Bramhall Ave"
+            },
+            "geometry": {
+                "x": -74.074941476024,
+                "y": 40.71531921665047
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 67,
+                "MJR_RD": "Merseles St",
+                "MNR_RD": "Grand St"
+            },
+            "geometry": {
+                "x": -74.05636463151615,
+                "y": 40.71738872519432
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 68,
+                "MJR_RD": "Merseles St",
+                "MNR_RD": "Pacific Ave"
+            },
+            "geometry": {
+                "x": -74.05612807674456,
+                "y": 40.71610426390952
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 69,
+                "MJR_RD": "Montgomery St",
+                "MNR_RD": "Baldwin Ave"
+            },
+            "geometry": {
+                "x": -74.06419871314174,
+                "y": 40.72381342027415
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 70,
+                "MJR_RD": "Montgomery St",
+                "MNR_RD": "Chopin Ct"
+            },
+            "geometry": {
+                "x": -74.05649841015008,
+                "y": 40.72138112170615
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 71,
+                "MJR_RD": "Montgomery St",
+                "MNR_RD": "Florence St"
+            },
+            "geometry": {
+                "x": -74.05984382765463,
+                "y": 40.72243145782923
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 72,
+                "MJR_RD": "Montgomery St",
+                "MNR_RD": "Jordan Ave"
+            },
+            "geometry": {
+                "x": -74.06624262997055,
+                "y": 40.72450012367867
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 73,
+                "MJR_RD": "Montgomery St",
+                "MNR_RD": "Merseles St"
+            },
+            "geometry": {
+                "x": -74.05538863371704,
+                "y": 40.72103449826275
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 74,
+                "MJR_RD": "Montgomery St",
+                "MNR_RD": "Orchard St"
+            },
+            "geometry": {
+                "x": -74.06677538195392,
+                "y": 40.724692014424846
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 75,
+                "MJR_RD": "Montgomery St",
+                "MNR_RD": "Summit Ave"
+            },
+            "geometry": {
+                "x": -74.06523247671365,
+                "y": 40.724148209946854
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 76,
+                "MJR_RD": "Montgomery St",
+                "MNR_RD": "Tuers Ave"
+            },
+            "geometry": {
+                "x": -74.06728726521614,
+                "y": 40.72484764946064
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 77,
+                "MJR_RD": "Monticello Ave",
+                "MNR_RD": "Belmont Ave"
+            },
+            "geometry": {
+                "x": -74.07085733594258,
+                "y": 40.72009822108254
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 78,
+                "MJR_RD": "Pacific Ave",
+                "MNR_RD": "Ash St"
+            },
+            "geometry": {
+                "x": -74.05779145011006,
+                "y": 40.714910692400835
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 79,
+                "MJR_RD": "Pacific Ave",
+                "MNR_RD": "Grand St"
+            },
+            "geometry": {
+                "x": -74.05461896276924,
+                "y": 40.71718466227741
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 80,
+                "MJR_RD": "Wayne St",
+                "MNR_RD": "Merseles St"
+            },
+            "geometry": {
+                "x": -74.05488791444347,
+                "y": 40.72240892640199
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 82,
+                "MJR_RD": "Palisade Ave",
+                "MNR_RD": "Hopkins Ave"
+            },
+            "geometry": {
+                "x": -74.05065659168727,
+                "y": 40.73407019310191
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 83,
+                "MJR_RD": "Palisade Ave",
+                "MNR_RD": "Booraem Ave"
+            },
+            "geometry": {
+                "x": -74.04761940058248,
+                "y": 40.73876565327045
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 84,
+                "MJR_RD": "St Pauls Ave",
+                "MNR_RD": "Skillman Ave"
+            },
+            "geometry": {
+                "x": -74.06367800624557,
+                "y": 40.73762593477546
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 85,
+                "MJR_RD": "Newark Ave",
+                "MNR_RD": "Senate Pl"
+            },
+            "geometry": {
+                "x": -74.06818721650077,
+                "y": 40.73625286857182
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 86,
+                "MJR_RD": "Newark Ave",
+                "MNR_RD": "6th St"
+            },
+            "geometry": {
+                "x": -74.05260485310136,
+                "y": 40.72616910209099
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 87,
+                "MJR_RD": "Duncan Ave",
+                "MNR_RD": "Lookout Dr"
+            },
+            "geometry": {
+                "x": -74.0841175933164,
+                "y": 40.73006610977383
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 88,
+                "MJR_RD": "Summit Ave",
+                "MNR_RD": "Sanford Pl"
+            },
+            "geometry": {
+                "x": -74.05453733042901,
+                "y": 40.74298244892107
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 89,
+                "MJR_RD": "Central Ave",
+                "MNR_RD": "Ferry St"
+            },
+            "geometry": {
+                "x": -74.05200832849242,
+                "y": 40.74217455951175
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 90,
+                "MJR_RD": "Ocean Ave",
+                "MNR_RD": "Virginia Ave"
+            },
+            "geometry": {
+                "x": -74.07568729813458,
+                "y": 40.711034825651296
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 92,
+                "MJR_RD": "Jersey Ave",
+                "MNR_RD": "Regent St"
+            },
+            "geometry": {
+                "x": -74.04954894615328,
+                "y": 40.715390574222226
+            }
+        }
+    ]
+}

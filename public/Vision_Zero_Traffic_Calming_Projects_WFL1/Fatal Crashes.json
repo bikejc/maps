@@ -1,0 +1,151 @@
+{
+    "objectIdFieldName": "OBJECTID",
+    "uniqueIdField": {
+        "name": "OBJECTID",
+        "isSystemMaintained": true
+    },
+    "globalIdFieldName": "",
+    "geometryType": "esriGeometryPoint",
+    "spatialReference": {
+        "wkid": 4326,
+        "latestWkid": 4326
+    },
+    "fields": [
+        {
+            "name": "OBJECTID",
+            "type": "esriFieldTypeOID",
+            "alias": "OBJECTID",
+            "sqlType": "sqlTypeOther",
+            "domain": null,
+            "defaultValue": null
+        }
+    ],
+    "features": [
+        {
+            "attributes": {
+                "OBJECTID": 1
+            },
+            "geometry": {
+                "x": -74.04616161643656,
+                "y": 40.74271175626015
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 2
+            },
+            "geometry": {
+                "x": -74.05232655810433,
+                "y": 40.735682566793216
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 3
+            },
+            "geometry": {
+                "x": -74.06889695187597,
+                "y": 40.71212297384021
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 4
+            },
+            "geometry": {
+                "x": -74.0698549422851,
+                "y": 40.71093249066059
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 5
+            },
+            "geometry": {
+                "x": -74.0645856135342,
+                "y": 40.71300824771847
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 6
+            },
+            "geometry": {
+                "x": -74.04718767475354,
+                "y": 40.755462538712614
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 7
+            },
+            "geometry": {
+                "x": -74.07669289224174,
+                "y": 40.71624272517819
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 8
+            },
+            "geometry": {
+                "x": -74.08109641223574,
+                "y": 40.73447213286735
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 9
+            },
+            "geometry": {
+                "x": -74.06810017557324,
+                "y": 40.725284548310675
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 11
+            },
+            "geometry": {
+                "x": -74.0545512142384,
+                "y": 40.73340435531149
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 12
+            },
+            "geometry": {
+                "x": -74.09118099057906,
+                "y": 40.722722225233966
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 13
+            },
+            "geometry": {
+                "x": -74.07722047751217,
+                "y": 40.720119641936435
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 14
+            },
+            "geometry": {
+                "x": -74.08150027598889,
+                "y": 40.71626232609585
+            }
+        },
+        {
+            "attributes": {
+                "OBJECTID": 15
+            },
+            "geometry": {
+                "x": -74.05402982828922,
+                "y": 40.72277168480155
+            }
+        }
+    ]
+}
