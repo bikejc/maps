@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import css from '../index.module.scss'
+import seedrandom from 'seedrandom'
 
 import Map from '../../components/Map';
 
@@ -9,70 +10,57 @@ import {useEffect, useMemo, useReducer, useState} from "react";
 import {dataUrls, layerInfos, layerOrder, MAPS} from "../../components/layers";
 import {useSet} from "../../utils/use-set";
 
-const DEFAULT_CENTER = [40.720, -74.066]
-const DEFAULT_ZOOM = 13
+const DEFAULT_CENTER = [40.1067, -74.9362]
+const DEFAULT_ZOOM = 9
 
 function randomColor() {
     const [ r, g, b ] = [0, 1, 2].map(() => parseInt(Math.random() * 256).toString(16)).map(c => c.length < 2 ? `0${c}` : c)
     return `#${r}${g}${b}`
 }
 
-function MapLayer({ TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, }) {
+function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom}) {
+    const map = useMapEvents({
+        move: () => {
+            setLL(map.getCenter())
+        },
+        zoom: () => {
+            setZoom(map.getZoom())
+        }
+    })
     const countiesLayer = () => {
+        seedrandom(4, { global: true })
         const rank = activeLayerIndices['counties']
         return (
             fetchedLayers['counties']?.map(({properties, geometry}) => {
                 const { COUNTY, COUNTY_LABEL, POP2010, POPDEN2010, } = properties
                 const {type, coordinates} = geometry
+                const fillColor = randomColor()
                 function Poly({ key, positions}) {
-                    const fillColor = randomColor()
                     return <Polygon style={{zIndex: 1}} weight={1} color={"black"} fillColor={fillColor} key={key}
-                             positions={positions} fillOpacity={0.2}>
+                             positions={positions} fillOpacity={0.4}>
                         <Tooltip sticky={true}>
                             <span>{COUNTY_LABEL}</span>
                             <br/>
-                            <span>2010 population: {POP2010} (density {POPDEN2010})</span>
+                            <span>2010 population: {POP2010.toLocaleString()} ({POPDEN2010.toLocaleString()}/mi²)</span>
                         </Tooltip>
                     </Polygon>
                 }
                 if (type === "MultiPolygon") {
                     return (
-                        coordinates.map((coords, idx) => {
-                            if (coords.length !== 1) {
-                                console.warn(`County ${COUNTY}: coordinates ${idx} contains ${coords.length} entries`)
-                            }
-                            const [polygon] = coords
-                            const positions = polygon.map(([lon, lat]) => [lat, lon])
-                            const key = `county-${COUNTY}_polygon${idx}_rank${rank}`
-                            // console.log(`county ${COUNTY}:`, polygon)
-                            return Poly({ key, positions, })
-                            // return (
-                            //     <Polygon style={{zIndex: 1}} weight={1} color={"black"} fillColor={"red"} key={key}
-                            //              positions={positions} fillOpacity={0.2}>
-                            //         <Tooltip sticky={true}>
-                            //             <span>{COUNTY_LABEL}</span>{' '}
-                            //             <span>2010 population: {POP2010} (density {POPDEN2010})</span>
-                            //         </Tooltip>
-                            //     </Polygon>
-                            // )
-                        })
+                        coordinates.map((coords, coordsIdx) =>
+                            coords.map((polygon, polygonIdx) => {
+                                const positions = polygon.map(([lon, lat]) => [lat, lon])
+                                const key = `county-${COUNTY}_coords${coordsIdx}_polygon${polygonIdx}_rank${rank}`
+                                return Poly({ key, positions, })
+                            })
+                        )
                     )
                 } else if (type === "Polygon") {
                     return (
                         coordinates.map((polygon, idx) => {
                             const positions = polygon.map(([lon, lat]) => [lat, lon])
                             const key = `county-${COUNTY}_polygon${idx}_rank${rank}`
-                            // console.log(`county ${COUNTY} positions:`, positions)
                             return Poly({ key, positions, })
-                            // return (
-                            //     <Polygon style={{zIndex: 1}} weight={1} color={"black"} fillColor={"red"} key={key}
-                            //              positions={positions} fillOpacity={0.2}>
-                            //         <Tooltip sticky={true}>
-                            //             <span>{COUNTY_LABEL}</span>{' '}
-                            //             <span>2010 population: {POP2010} (density {POPDEN2010})</span>
-                            //         </Tooltip>
-                            //     </Polygon>
-                            // )
                         })
                     )
                 } else {
@@ -98,6 +86,9 @@ export default function Home({}) {
     const [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ] = useSet([ 'counties' ])
     let activeLayers = Array.from(rawActiveLayers).map(k => [ layerOrder.indexOf(k), k ]).sort(([ l ], [ r ]) => l - r).map(([ _, k ]) => k)
 
+    const [ ll, setLL ] = useState(DEFAULT_CENTER)
+    const [ zoom, setZoom ] = useState(DEFAULT_ZOOM)
+
     const [ fetchedLayers, addFetchedLayer ] = useReducer(
         (layers, [ k, layer ]) => {
             if (k in layers) {
@@ -118,7 +109,7 @@ export default function Home({}) {
         layers
     )
 
-    console.log("render: fetchedLayers:", fetchedLayers)
+    // console.log("render: fetchedLayers:", fetchedLayers)
     const activeLayerIndices = useMemo(
         () => Object.fromEntries(activeLayers.filter(k => k in fetchedLayers && fetchedLayers[k]).map((k, idx) => [ k, idx ])),
         [ fetchedLayers, activeLayers, ]
@@ -157,7 +148,9 @@ export default function Home({}) {
         }
 
         Promise.all(activeLayers.map(fetchLayer)).catch(console.error)
-    }, [ activeLayers ])
+    }, [ rawActiveLayers ])
+
+    console.log("ll: ", ll, "zoom:", zoom)
 
     return (
         <div className={styles.container}>
@@ -180,7 +173,7 @@ export default function Home({}) {
             <main className={styles.main}>{
                 (typeof window !== undefined) && <>
                     <Map className={styles.homeMap} center={DEFAULT_CENTER} zoom={DEFAULT_ZOOM} zoomControl={false}>
-                        { props => MapLayer({ ...props, activeLayerIndices, fetchedLayers, activeLayers, }) }
+                        { props => MapLayer({ ...props, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom, }) }
                     </Map>
                     <div className={styles.title}>{title}</div>
                     <div className={css.gearContainer} onMouseEnter={() => setHoverSettings(true)} onMouseLeave={() => setHoverSettings(false)}>
