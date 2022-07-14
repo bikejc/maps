@@ -9,6 +9,8 @@ import Map from '../components/Map';
 import styles from '../../styles/Home.module.css';
 
 import {useEffect, useMemo, useReducer, useState} from "react";
+import {bikeLaneTypes, dataUrls, layerInfos, layerOrder, MAPS, wardInfos} from "../components/layers";
+import {useSet} from "../utils/use-set";
 
 const DEFAULT_CENTER = [40.720, -74.066]
 const DEFAULT_ZOOM = 13
@@ -28,51 +30,6 @@ export async function getStaticProps(context) {
         props: { layers }
     }
 }
-
-const wardInfos = {
-    A: { color: '#ff0000', councillor: 'Denise Ridley', },
-    B: { color: '#ff8800', councillor: 'Mira Prinz-Arey', },
-    C: { color: '#ffff00', councillor: 'Rich Boggiano', },
-    D: { color: '#00ff00', councillor: 'Yousef Saleh', },
-    E: { color: '#0000ff', councillor: 'James Solomon', },
-    F: { color: '#ff00ff', councillor: 'Frank Gilmore', },
-}
-
-const bikeLaneTypes = {
-    'PROTECTED BIKE LANE': { color: '#26de3b', },
-    'PLANNED PROTECTED BIKE LANE': { color: '#b122e0', },
-    'SHARED USE LANE': { color: '#FFFF00', },
-    'SHARED USE PATH': { color: '#00FFFF', },
-}
-
-const MAPS = {
-    openstreetmap: {
-        url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        attribution: "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors",
-    },
-    alidade_smooth_dark: {
-        url: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-        attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-    },
-}
-
-const dataUrls = {
-    'roads': 'Roads_Jersey_City.json',
-    'lur': 'light-up-route-20220708.gpx',
-    'citibike': 'JC_Citi_Bike_Locations.json',
-    'HIN': 'Vision_Zero_Traffic_Calming_Projects_WFL1/Merged_HIN.json',
-}
-
-const layerInfos = [
-    { label: "Bike Lanes", key: "bikeLanes", },
-    { label: "Roads", key: "roads", },
-    { label: "Wards", key: "wards", },
-    { label: "Citi Bike Docks", key: "citibike", },
-    { label: "High Injury Network", key: "HIN", },
-    // { label: "Light-Up Ride 7/8/22", key: "lur"},
-]
-
-const layerOrder = [ 'wards', 'roads', 'HIN', 'bikeLanes', 'citibike', ]
 
 function MapLayer({ TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, }) {
     const wardsLayer = () => {
@@ -203,22 +160,6 @@ function MapLayer({ TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, P
     )
 }
 
-const useSet = initialValue => {
-    const [set, setSet] = useState(new Set(initialValue));
-
-    const actions = useMemo(
-        () => ({
-            add: item => setSet(prevSet => new Set([...prevSet, item])),
-            remove: item =>
-                setSet(prevSet => new Set([...prevSet].filter(i => i !== item))),
-            clear: () => setSet(new Set()),
-        }),
-        [setSet]
-    );
-
-    return [set, actions];
-}
-
 export default function Home({ layers, }) {
     const [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ] = useSet([ 'wards', 'bikeLanes', 'citibike', /*'HIN'*/ ])
     let activeLayers = Array.from(rawActiveLayers).map(k => [ layerOrder.indexOf(k), k ]).sort(([ l ], [ r ]) => l - r).map(([ _, k ]) => k)
@@ -244,7 +185,10 @@ export default function Home({ layers, }) {
     )
 
     console.log("render: fetchedLayers:", fetchedLayers)
-    const activeLayerIndices = useMemo(() => Object.fromEntries(activeLayers.filter(k => k in fetchedLayers && fetchedLayers[k]).map((k, idx) => [ k, idx ])), [ fetchedLayers, activeLayers, ])
+    const activeLayerIndices = useMemo(
+        () => Object.fromEntries(activeLayers.filter(k => k in fetchedLayers && fetchedLayers[k]).map((k, idx) => [ k, idx ])),
+        [ fetchedLayers, activeLayers, ]
+    )
 
     const [ showSettings, setShowSettings ] = useState(false)
     const [ hoverSettings, setHoverSettings ] = useState(false)
