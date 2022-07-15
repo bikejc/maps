@@ -6,11 +6,15 @@ import Map from '../../components/Map';
 
 import styles from '../../../styles/Home.module.css';
 
-import {useEffect, useMemo, useReducer, useState} from "react";
+import {useCallback, useEffect, useMemo, useReducer, useState} from "react";
 import {dataUrls, layerInfos, layerOrder, MAPS} from "../../components/layers";
 import {useSet} from "../../utils/use-set";
+import {boolParam, LatLngParam, useLLQueryParam, useLLZQueryParam} from "../../utils/search-params";
+import {NumberParam, useQueryParam, useQueryParams, withDefault} from "use-query-params";
+import {useRouter} from "next/router";
+// import {withDefault} from "next-query-params";
 
-const DEFAULT_CENTER = [40.1067, -74.9362]
+const DEFAULT_CENTER = { lat: 40.1067, lng: -74.9362 }
 const DEFAULT_ZOOM = 9
 
 function randomColor() {
@@ -20,18 +24,17 @@ function randomColor() {
 
 function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom}) {
     const map = useMapEvents({
-        move: () => {
-            setLL(map.getCenter())
-        },
+        move: () => setLL(map.getCenter(), 'replaceIn'),
         zoom: () => {
+            console.log("zoom:", map.getZoom())
             setZoom(map.getZoom())
-        }
+        },
     })
     const countiesLayer = () => {
         seedrandom(4, { global: true })
         const rank = activeLayerIndices['counties']
         return (
-            fetchedLayers['counties']?.map(({properties, geometry}) => {
+            fetchedLayers['counties']?.slice(0, 1)?.map(({properties, geometry}) => {
                 const { COUNTY, COUNTY_LABEL, POP2010, POPDEN2010, } = properties
                 const {type, coordinates} = geometry
                 const fillColor = randomColor()
@@ -49,7 +52,7 @@ function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, 
                     return (
                         coordinates.map((coords, coordsIdx) =>
                             coords.map((polygon, polygonIdx) => {
-                                const positions = polygon.map(([lon, lat]) => [lat, lon])
+                                const positions = polygon.map(([lng, lat]) => [lat, lng])
                                 const key = `county-${COUNTY}_coords${coordsIdx}_polygon${polygonIdx}_rank${rank}`
                                 return Poly({ key, positions, })
                             })
@@ -58,7 +61,7 @@ function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, 
                 } else if (type === "Polygon") {
                     return (
                         coordinates.map((polygon, idx) => {
-                            const positions = polygon.map(([lon, lat]) => [lat, lon])
+                            const positions = polygon.map(([lng, lat]) => [lat, lng])
                             const key = `county-${COUNTY}_polygon${idx}_rank${rank}`
                             return Poly({ key, positions, })
                         })
@@ -83,11 +86,31 @@ function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, 
 
 export default function Home({}) {
     const layers = []
+    const router = useRouter()
     const [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ] = useSet([ 'counties' ])
     let activeLayers = Array.from(rawActiveLayers).map(k => [ layerOrder.indexOf(k), k ]).sort(([ l ], [ r ]) => l - r).map(([ _, k ]) => k)
 
-    const [ ll, setLL ] = useState(DEFAULT_CENTER)
-    const [ zoom, setZoom ] = useState(DEFAULT_ZOOM)
+    // const [ flag, setFlag ] = useQueryParam("flag", boolParam(true))
+    // const [ lat, setLat ] = useQueryParam('lat', withDefault(NumberParam, DEFAULT_CENTER.lat));
+    // const [ lng, setLng ] = useQueryParam('lng', withDefault(NumberParam, DEFAULT_CENTER.lng));
+    const [ { lat, lng }, setLL ] = useQueryParams({
+        'lat': NumberParam,
+        'lng': NumberParam,
+    })
+    // const [ { /*ll: { lat, lng },*/ z: zoom }, setLLZ ] = useQueryParams({
+    //     'll': LatLngParam({ defValue: DEFAULT_CENTER, places: 2, delim: "_", }),
+        // 'z': withDefault(NumberParam, DEFAULT_ZOOM),
+    // })
+    // const [ zoom, setZoom ] = useQueryParam('zoom', withDefault(new NumberParam, DEFAULT_ZOOM));
+    // const [ { lat, lng, }, setLL ] = useLLQueryParam('ll', { defValue: DEFAULT_CENTER, places: 2, delim: "_", })
+    // const [ { lat, lng, }, setLL ] = useState(DEFAULT_CENTER)
+    const [ zoom, setZoom ] = useState(DEFAULT_ZOOM);
+
+    console.log("render:", router.asPath, "ll: ", lat, lng, "zoom:", zoom)
+
+    // const setLL = useMemo(() => ll => setLLZ({ ll }), [ setLLZ ])
+    // const setZoom = useMemo(() => z => setLLZ({ z }), [ setLLZ ])
+    // const setLL = useMemo(() => ({lat, lng}) => { setLat(lat, 'replaceIn'); setLng(lng, 'replaceIn') }, [ setLat, setLng ])
 
     const [ fetchedLayers, addFetchedLayer ] = useReducer(
         (layers, [ k, layer ]) => {
@@ -150,8 +173,6 @@ export default function Home({}) {
         Promise.all(activeLayers.map(fetchLayer)).catch(console.error)
     }, [ rawActiveLayers ])
 
-    console.log("ll: ", ll, "zoom:", zoom)
-
     return (
         <div className={styles.container}>
             <Head>
@@ -172,7 +193,7 @@ export default function Home({}) {
 
             <main className={styles.main}>{
                 (typeof window !== undefined) && <>
-                    <Map className={styles.homeMap} center={DEFAULT_CENTER} zoom={DEFAULT_ZOOM} zoomControl={false}>
+                    <Map className={styles.homeMap} center={DEFAULT_CENTER} zoom={zoom} zoomControl={true} zoomDelta={0.6} zoomSnap={0.6}>
                         { props => MapLayer({ ...props, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom, }) }
                     </Map>
                     <div className={styles.title}>{title}</div>
