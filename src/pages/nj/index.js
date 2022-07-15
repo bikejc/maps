@@ -6,13 +6,10 @@ import Map from '../../components/Map';
 
 import styles from '../../../styles/Home.module.css';
 
-import {useCallback, useEffect, useMemo, useReducer, useState} from "react";
+import {useEffect, useMemo, useReducer, useState} from "react";
 import {dataUrls, layerInfos, layerOrder, MAPS} from "../../components/layers";
 import {useSet} from "../../utils/use-set";
-import {boolParam, LatLngParam, useLLQueryParam, useLLZQueryParam} from "../../utils/search-params";
-import {NumberParam, useQueryParam, useQueryParams, withDefault} from "use-query-params";
 import {useRouter} from "next/router";
-// import {withDefault} from "next-query-params";
 
 const DEFAULT_CENTER = { lat: 40.1067, lng: -74.9362 }
 const DEFAULT_ZOOM = 9
@@ -94,7 +91,6 @@ export default function Home({}) {
 
     const searchStr = router.asPath.replace(pathnameRegex, '')
     const search = Object.fromEntries(new URLSearchParams(searchStr).entries())
-    // console.log("router.query:", router.query, "asPath:", router.asPath, "search:", search)
     let ll
     if (search.ll) {
         const [ lat, lng ] = search.ll.split("_").map(parseFloat)
@@ -102,8 +98,6 @@ export default function Home({}) {
     }
     const [ { lat, lng, }, setLL ] = useState(ll || DEFAULT_CENTER)
     const [ zoom, setZoom ] = useState((search.z !== undefined) && parseFloat(search.z) || DEFAULT_ZOOM);
-
-    // console.log("render:", router.asPath, "ll: ", lat, lng, "zoom:", zoom)
 
     const match = router.asPath.match(pathnameRegex);
     const pathname = match ? match[0] : router.asPath;
@@ -144,7 +138,6 @@ export default function Home({}) {
         layers
     )
 
-    // console.log("render: fetchedLayers:", fetchedLayers)
     const activeLayerIndices = useMemo(
         () => Object.fromEntries(activeLayers.filter(k => k in fetchedLayers && fetchedLayers[k]).map((k, idx) => [ k, idx ])),
         [ fetchedLayers, activeLayers, ]
