@@ -93,23 +93,26 @@ export default function Home({}) {
     // const [ flag, setFlag ] = useQueryParam("flag", boolParam(true))
     // const [ lat, setLat ] = useQueryParam('lat', withDefault(NumberParam, DEFAULT_CENTER.lat));
     // const [ lng, setLng ] = useQueryParam('lng', withDefault(NumberParam, DEFAULT_CENTER.lng));
-    const [ { lat, lng }, setLL ] = useQueryParams({
-        'lat': NumberParam,
-        'lng': NumberParam,
-    })
-    // const [ { /*ll: { lat, lng },*/ z: zoom }, setLLZ ] = useQueryParams({
-    //     'll': LatLngParam({ defValue: DEFAULT_CENTER, places: 2, delim: "_", }),
-        // 'z': withDefault(NumberParam, DEFAULT_ZOOM),
+
+    // const [ { lat, lng }, setLL ] = useQueryParams({
+    //     'lat': NumberParam,
+    //     'lng': NumberParam,
     // })
-    // const [ zoom, setZoom ] = useQueryParam('zoom', withDefault(new NumberParam, DEFAULT_ZOOM));
+    // const [ zoom, setZoom ] = useQueryParam('zoom', withDefault(NumberParam, DEFAULT_ZOOM));
+
+    const [ { ll: { lat, lng }, zoom }, setLLZ ] = useQueryParams({
+        ll: LatLngParam({ defValue: DEFAULT_CENTER, places: 3, delim: "_", }),
+        zoom: withDefault(NumberParam, DEFAULT_ZOOM),
+    })
+    const setLL = useMemo(() => ll => setLLZ({ ll }), [ setLLZ ])
+    const setZoom = useMemo(() => zoom => setLLZ({ zoom }), [ setLLZ ])
+
     // const [ { lat, lng, }, setLL ] = useLLQueryParam('ll', { defValue: DEFAULT_CENTER, places: 2, delim: "_", })
     // const [ { lat, lng, }, setLL ] = useState(DEFAULT_CENTER)
-    const [ zoom, setZoom ] = useState(DEFAULT_ZOOM);
+    // const [ zoom, setZoom ] = useState(DEFAULT_ZOOM);
 
     console.log("render:", router.asPath, "ll: ", lat, lng, "zoom:", zoom)
 
-    // const setLL = useMemo(() => ll => setLLZ({ ll }), [ setLLZ ])
-    // const setZoom = useMemo(() => z => setLLZ({ z }), [ setLLZ ])
     // const setLL = useMemo(() => ({lat, lng}) => { setLat(lat, 'replaceIn'); setLng(lng, 'replaceIn') }, [ setLat, setLng ])
 
     const [ fetchedLayers, addFetchedLayer ] = useReducer(

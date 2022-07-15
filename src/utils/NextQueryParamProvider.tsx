@@ -18,6 +18,7 @@ function NextQueryParamProvider({children, shallow = true, ...rest}: Props) {
     const query = router.query
 
     const location = useMemo(() => {
+        console.log("re-computing location")
         if (typeof window !== 'undefined') {
             // For SSG, no query parameters are available on the server side,
             // since they can't be known at build time. Therefore to avoid
@@ -26,7 +27,7 @@ function NextQueryParamProvider({children, shallow = true, ...rest}: Props) {
             // Note that for SSR `router.isReady` will be `true` immediately
             // and therefore there's no two-part render in this case.
             if (router.isReady) {
-                console.log("router.isReady; window.location:", window.location)
+                console.log(`router.isReady! window.location.href: ${window.location.href}, router.query:`, router.query)
                 return window.location;
             } else {
                 console.log("Return empty search location")
@@ -48,9 +49,10 @@ function NextQueryParamProvider({children, shallow = true, ...rest}: Props) {
     }, [ router.asPath, router.isReady, ]);
 
     const history = useMemo(() => {
+        console.log("re-computing history")
         function createUpdater(routeFn: typeof router.push) {
             return function updater({hash, search}: Location) {
-                console.log("updater; hash", hash, "search", search, "router.query:", router.query)
+                console.log(`updater; hash "${hash}", search "${search}", router.query:`, router.query)
                 // hash = search.substr(1)
                 // search = ''
                 routeFn(
@@ -66,7 +68,7 @@ function NextQueryParamProvider({children, shallow = true, ...rest}: Props) {
         return {
             push: createUpdater(router.push),
             replace: createUpdater(router.replace),
-            location
+            location,
         };
     }, [location, pathname, router, shallow]);
 
