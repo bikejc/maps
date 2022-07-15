@@ -27,11 +27,16 @@ export const MAPS = {
 }
 
 export const dataUrls = {
+    'wards': 'wards.json',
     'roads': 'Roads_Jersey_City.json',
     'lur': 'light-up-route-20220708.gpx',
     'citibike': 'JC_Citi_Bike_Locations.json',
     'HIN': 'Vision_Zero_Traffic_Calming_Projects_WFL1/Merged_HIN.json',
+    //'counties': 'County_Boundaries_of_NJ.geojson',
     'counties': 'County_Boundaries_of_NJ.geojson',
+    'county2': 'County_Boundaries_of_NJ_2x.geojson',
+    'county5': 'County_Boundaries_of_NJ_5x.geojson',
+    'county10': 'County_Boundaries_of_NJ_10x.geojson',
 }
 
 export const layerInfos = [
@@ -40,8 +45,11 @@ export const layerInfos = [
     { label: "Wards", key: "wards", },
     { label: "Citi Bike Docks", key: "citibike", },
     { label: "High Injury Network", key: "HIN", },
-    { label: "Counties", key: "counties", }
+    { label: "Counties", key: "counties", },
+    { label: "Counties/2", key: "county2", },
+    { label: "Counties/5", key: "county5", },
+    { label: "Counties/10", key: "county10", },
     // { label: "Light-Up Ride 7/8/22", key: "lur"},
 ]
 
-export const layerOrder = [ 'wards', 'counties', 'roads', 'HIN', 'bikeLanes', 'citibike', ]
+export const layerOrder = [ 'wards', 'counties', 'county2', 'county5', 'county10', 'roads', 'HIN', 'bikeLanes', 'citibike', ]

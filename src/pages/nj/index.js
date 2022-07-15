@@ -6,8 +6,8 @@ import Map from '../../components/Map';
 
 import styles from '../../../styles/Home.module.css';
 
-import {useEffect, useMemo, useReducer, useState} from "react";
-import {dataUrls, layerInfos, layerOrder, MAPS} from "../../components/layers";
+import {Fragment, useEffect, useMemo, useReducer, useState} from "react";
+import {dataUrls, layerInfos, layerOrder, MAPS, wardInfos} from "../../components/layers";
 import {useSet} from "../../utils/use-set";
 import {useRouter} from "next/router";
 
@@ -19,31 +19,39 @@ function randomColor() {
     return `#${r}${g}${b}`
 }
 
-function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom}) {
+function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom, counties}) {
     const map = useMapEvents({
         move: () => setLL(map.getCenter(), 'replaceIn'),
-        zoom: () => {
-            console.log("zoom:", map.getZoom())
-            setZoom(map.getZoom())
-        },
+        zoom: () => setZoom(map.getZoom(), 'replaceIn'),
     })
-    const countiesLayer = () => {
+
+    const countiesLayer = useMemo(() => (layerKey, county) => {
         seedrandom(4, { global: true })
-        const rank = activeLayerIndices['counties']
+        const rank = activeLayerIndices[layerKey]
         return (
-            fetchedLayers['counties']?.slice(0, 1)?.map(({properties, geometry}) => {
+            fetchedLayers[layerKey]?.filter(({ properties }) => !counties || counties.includes(properties.COUNTY))?.map(({properties, geometry}) => {
                 const { COUNTY, COUNTY_LABEL, POP2010, POPDEN2010, } = properties
                 const {type, coordinates} = geometry
                 const fillColor = randomColor()
-                function Poly({ key, positions}) {
-                    return <Polygon style={{zIndex: 1}} weight={1} color={"black"} fillColor={fillColor} key={key}
-                             positions={positions} fillOpacity={0.4}>
-                        <Tooltip sticky={true}>
-                            <span>{COUNTY_LABEL}</span>
-                            <br/>
-                            <span>2010 population: {POP2010.toLocaleString()} ({POPDEN2010.toLocaleString()}/mi²)</span>
-                        </Tooltip>
-                    </Polygon>
+
+                function Poly({ key, positions, }) {
+                    return <Fragment key={key}>
+                        <Polygon style={{zIndex: 1}} weight={1} color={"black"} fillColor={fillColor} key={key}
+                                 positions={positions} fillOpacity={0.4}>
+                            <Tooltip sticky={true}>
+                                <span key={"county"}>{COUNTY_LABEL}</span>
+                                <br key={"br"} />
+                                <span key={"population"}>2010 population: {POP2010.toLocaleString()} ({POPDEN2010.toLocaleString()}/mi²)</span>
+                            </Tooltip>
+                        </Polygon>
+                        {/*{*/}
+                        {/*    positions.map((p, idx) =>*/}
+                        {/*        <Circle key={`${key}_point${idx}`} center={p} color={fillColor} radius={10}>*/}
+                        {/*            <Tooltip sticky={true}>{COUNTY}: {p}</Tooltip>*/}
+                        {/*        </Circle>*/}
+                        {/*    )*/}
+                        {/*}*/}
+                    </Fragment>
                 }
                 if (type === "MultiPolygon") {
                     return (
@@ -59,7 +67,7 @@ function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, 
                     return (
                         coordinates.map((polygon, idx) => {
                             const positions = polygon.map(([lng, lat]) => [lat, lng])
-                            const key = `county-${COUNTY}_polygon${idx}_rank${rank}`
+                            const key = `${layerKey}-${COUNTY}_polygon${idx}_rank${rank}`
                             return Poly({ key, positions, })
                         })
                     )
@@ -69,14 +77,18 @@ function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, 
                 }
             })
         )
-    }
+    }, [ fetchedLayers, activeLayerIndices ]
+    )
 
     const { url, attribution } = MAPS['alidade_smooth_dark']
 
     return (
         <>
             <TileLayer url={url} attribution={attribution}/>
-            {('counties' in fetchedLayers) && activeLayers.includes('counties') && countiesLayer()}
+            {('counties' in fetchedLayers) && activeLayers.includes('counties') && countiesLayer('counties')}
+            {('county2' in fetchedLayers) && activeLayers.includes('county2') && countiesLayer('county2')}
+            {('county5' in fetchedLayers) && activeLayers.includes('county5') && countiesLayer('county5')}
+            {('county10' in fetchedLayers) && activeLayers.includes('county10') && countiesLayer('county10')}
         </>
     )
 }
@@ -86,7 +98,7 @@ const pathnameRegex = /[^?#]+/u;
 export default function Home({}) {
     const layers = []
     const router = useRouter()
-    const [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ] = useSet([ 'counties' ])
+    const [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ] = useSet([ 'county10' ])
     let activeLayers = Array.from(rawActiveLayers).map(k => [ layerOrder.indexOf(k), k ]).sort(([ l ], [ r ]) => l - r).map(([ _, k ]) => k)
 
     const searchStr = router.asPath.replace(pathnameRegex, '')
@@ -99,6 +111,8 @@ export default function Home({}) {
     const [ { lat, lng, }, setLL ] = useState(ll || DEFAULT_CENTER)
     const [ zoom, setZoom ] = useState((search.z !== undefined) && parseFloat(search.z) || DEFAULT_ZOOM);
 
+    const [ counties, setCounties ] = useState(search.counties?.split(',') /*|| ['ATLANTIC', 'BURLINGTON', 'CAMDEN']*/)
+
     const match = router.asPath.match(pathnameRegex);
     const pathname = match ? match[0] : router.asPath;
 
@@ -106,16 +120,20 @@ export default function Home({}) {
         () => {
             const places = 3
             const ll = `${lat.toFixed(places)}_${lng.toFixed(places)}`
-            const search = new URLSearchParams({ ll, z: zoom }).toString()
+            const params = { ll, z: zoom }
+            if (counties) {
+                params.counties = counties
+            }
+            const search = new URLSearchParams(params).toString()
             const hash = ''
-            console.log("search:", search)
+            // console.log("search:", search)
             router.replace(
                 { pathname: router.pathname, hash, search},
                 { pathname, hash, search, },
                 { shallow: true, scroll: false, }
-            ).then(rv => console.log(`replaced: ${rv}`))
+            )/*.then(rv => console.log(`replaced: ${rv}`))*/
         },
-        [ lat, lng, zoom, pathname, ]
+        [ lat, lng, zoom, pathname, counties, ]
     )
 
     const [ fetchedLayers, addFetchedLayer ] = useReducer(
@@ -198,8 +216,8 @@ export default function Home({}) {
 
             <main className={styles.main}>{
                 (typeof window !== undefined) && <>
-                    <Map className={styles.homeMap} center={{ lat, lng }} zoom={zoom} zoomControl={true} zoomDelta={0.6} zoomSnap={0.6}>
-                        { props => MapLayer({ ...props, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom, }) }
+                    <Map className={styles.homeMap} center={{ lat, lng }} zoom={zoom} zoomControl={true} zoomDelta={0.5} zoomSnap={0.5}>
+                        { props => MapLayer({ ...props, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom, counties, }) }
                     </Map>
                     <div className={styles.title}>{title}</div>
                     <div className={css.gearContainer} onMouseEnter={() => setHoverSettings(true)} onMouseLeave={() => setHoverSettings(false)}>
