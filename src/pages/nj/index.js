@@ -84,36 +84,45 @@ function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, 
     )
 }
 
+const pathnameRegex = /[^?#]+/u;
+
 export default function Home({}) {
     const layers = []
     const router = useRouter()
     const [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ] = useSet([ 'counties' ])
     let activeLayers = Array.from(rawActiveLayers).map(k => [ layerOrder.indexOf(k), k ]).sort(([ l ], [ r ]) => l - r).map(([ _, k ]) => k)
 
-    // const [ flag, setFlag ] = useQueryParam("flag", boolParam(true))
-    // const [ lat, setLat ] = useQueryParam('lat', withDefault(NumberParam, DEFAULT_CENTER.lat));
-    // const [ lng, setLng ] = useQueryParam('lng', withDefault(NumberParam, DEFAULT_CENTER.lng));
+    const searchStr = router.asPath.replace(pathnameRegex, '')
+    const search = Object.fromEntries(new URLSearchParams(searchStr).entries())
+    // console.log("router.query:", router.query, "asPath:", router.asPath, "search:", search)
+    let ll
+    if (search.ll) {
+        const [ lat, lng ] = search.ll.split("_").map(parseFloat)
+        ll = { lat, lng }
+    }
+    const [ { lat, lng, }, setLL ] = useState(ll || DEFAULT_CENTER)
+    const [ zoom, setZoom ] = useState((search.z !== undefined) && parseFloat(search.z) || DEFAULT_ZOOM);
 
-    // const [ { lat, lng }, setLL ] = useQueryParams({
-    //     'lat': NumberParam,
-    //     'lng': NumberParam,
-    // })
-    // const [ zoom, setZoom ] = useQueryParam('zoom', withDefault(NumberParam, DEFAULT_ZOOM));
+    // console.log("render:", router.asPath, "ll: ", lat, lng, "zoom:", zoom)
 
-    const [ { ll: { lat, lng }, zoom }, setLLZ ] = useQueryParams({
-        ll: LatLngParam({ defValue: DEFAULT_CENTER, places: 3, delim: "_", }),
-        zoom: withDefault(NumberParam, DEFAULT_ZOOM),
-    })
-    const setLL = useMemo(() => ll => setLLZ({ ll }), [ setLLZ ])
-    const setZoom = useMemo(() => zoom => setLLZ({ zoom }), [ setLLZ ])
+    const match = router.asPath.match(pathnameRegex);
+    const pathname = match ? match[0] : router.asPath;
 
-    // const [ { lat, lng, }, setLL ] = useLLQueryParam('ll', { defValue: DEFAULT_CENTER, places: 2, delim: "_", })
-    // const [ { lat, lng, }, setLL ] = useState(DEFAULT_CENTER)
-    // const [ zoom, setZoom ] = useState(DEFAULT_ZOOM);
-
-    console.log("render:", router.asPath, "ll: ", lat, lng, "zoom:", zoom)
-
-    // const setLL = useMemo(() => ({lat, lng}) => { setLat(lat, 'replaceIn'); setLng(lng, 'replaceIn') }, [ setLat, setLng ])
+    useEffect(
+        () => {
+            const places = 3
+            const ll = `${lat.toFixed(places)}_${lng.toFixed(places)}`
+            const search = new URLSearchParams({ ll, z: zoom }).toString()
+            const hash = ''
+            console.log("search:", search)
+            router.replace(
+                { pathname: router.pathname, hash, search},
+                { pathname, hash, search, },
+                { shallow: true, scroll: false, }
+            ).then(rv => console.log(`replaced: ${rv}`))
+        },
+        [ lat, lng, zoom, pathname, ]
+    )
 
     const [ fetchedLayers, addFetchedLayer ] = useReducer(
         (layers, [ k, layer ]) => {
@@ -196,7 +205,7 @@ export default function Home({}) {
 
             <main className={styles.main}>{
                 (typeof window !== undefined) && <>
-                    <Map className={styles.homeMap} center={DEFAULT_CENTER} zoom={zoom} zoomControl={true} zoomDelta={0.6} zoomSnap={0.6}>
+                    <Map className={styles.homeMap} center={{ lat, lng }} zoom={zoom} zoomControl={true} zoomDelta={0.6} zoomSnap={0.6}>
                         { props => MapLayer({ ...props, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom, }) }
                     </Map>
                     <div className={styles.title}>{title}</div>
