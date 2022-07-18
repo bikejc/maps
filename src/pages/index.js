@@ -10,8 +10,7 @@ import styles from '../../styles/Home.module.css';
 
 import {useEffect, useMemo, useReducer, useState} from "react";
 import {bikeLaneTypes, bmpLaneTypes, dataUrls, allLayerInfos, layerOrder, MAPS, wardInfos} from "../components/layers";
-import {useSet} from "../utils/use-set";
-import {floatParam, llParam, parseQueryParams, pathnameRegex} from "../utils/params";
+import {enumMultiParam, floatParam, llParam, parseQueryParams, pathnameRegex} from "../utils/params";
 
 const DEFAULT_CENTER = { lat: 40.720, lng: -74.066, }
 const DEFAULT_ZOOM = 13
@@ -101,7 +100,7 @@ function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, 
                 const position = [ geometry.y, geometry.x ]
                 const key = `${OBJECTID}_rank${rank}`
                 return (
-                    <Circle key={key} center={position} color={"lightblue"} radius={15}>
+                    <Circle key={key} center={position} color={"orange"} radius={15}>
                         <Tooltip sticky={true}>
                             {name} ({StationID})
                         </Tooltip>
@@ -190,15 +189,35 @@ function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, 
     )
 }
 
-export default function Home({ layers, }) {
-    const [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ] = useSet([ 'wards', 'bikeLanes', 'citibike', /*'bmp',*/ ])
-    let activeLayers = Array.from(rawActiveLayers).map(k => [ layerOrder.indexOf(k), k ]).sort(([ l ], [ r ]) => l - r).map(([ _, k ]) => k)
+const layerInfos = allLayerInfos.filter(({ key }) => ['wards', 'roads', 'bmp', 'bikeLanes', 'citibike',].includes(key))
+const layerKeys = layerInfos.map(({ key }) => key)
 
+export default function Home({ layers, }) {
     const params = {
+        l: enumMultiParam({
+            init: [ 'wards', 'bikeLanes', 'citibike', /*'bmp',*/ ],
+            allValues: layerKeys,
+            mapper: { 'wards': 'w', 'bikeLanes': 'b', 'citibike': 'c', 'bmp': 'p', 'roads': 'r', },
+            delim: '',
+        }),
         ll: llParam(DEFAULT_CENTER, 3),
         z: floatParam(DEFAULT_ZOOM),
     }
-    const { ll: [ { lat, lng }, setLL ], z: [ zoom, setZoom, ] } = parseQueryParams({ params })
+    const {
+        ll: [ { lat, lng }, setLL ],
+        z: [ zoom, setZoom, ],
+        l: [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ],
+    } = parseQueryParams({ params })
+
+    const activeLayers = useMemo(
+        () =>
+            Array
+                .from(rawActiveLayers)
+                .map(k => [ layerOrder.indexOf(k), k ])
+                .sort(([ l ], [ r ]) => l - r)
+                .map(([ _, k ]) => k),
+        [rawActiveLayers]
+    )
 
     const [ fetchedLayers, addFetchedLayer ] = useReducer(
         (layers, [ k, layer ]) => {
@@ -229,7 +248,6 @@ export default function Home({ layers, }) {
     const [ showSettings, setShowSettings ] = useState(false)
     const [ hoverSettings, setHoverSettings ] = useState(false)
 
-    // const router = useRouter()
     const href = (typeof window !== 'undefined') && window.location.href || undefined
     const match = href?.match(pathnameRegex);
     const pathname = match ? match[0] : href;
@@ -292,8 +310,6 @@ export default function Home({ layers, }) {
 
         Promise.all(activeLayers.map(fetchLayer)).catch(console.error)
     }, [ activeLayers ])
-
-    const layerInfos = allLayerInfos.filter(({ key }) => ['wards', 'bmp', 'bikeLanes', 'citibike',].includes(key))
 
     return (
         <div className={styles.container}>

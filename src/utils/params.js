@@ -1,11 +1,12 @@
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
+import {useSet} from "./use-set";
 
 export const pathnameRegex = /[^?#]+/u;
 
 export function llParam(init, places) {
     return {
-        encode: ({ lat, lng }) => places ? `${lat.toFixed(places)}_${lng.toFixed(places)}` : `${lat}_${lng}`,
+        encode: ({ lat, lng }) => (lat === init.lat && lng === init.lng) ? undefined : (places ? `${lat.toFixed(places)}_${lng.toFixed(places)}` : `${lat}_${lng}`),
         decode: v => {
             if (!v) return init
             const [ lat, lng ] = v.split("_").map(parseFloat)
@@ -15,7 +16,62 @@ export function llParam(init, places) {
 }
 
 export function floatParam(init) {
-    return { encode: v => v.toString(), decode: v => v ? parseFloat(v) : init }
+    return { encode: v => v === init ? undefined : v.toString(), decode: v => v ? parseFloat(v) : init }
+}
+
+export function enumMultiParam({ init, allValues, mapper, delim }) {
+    delim = typeof delim === 'undefined' ? '_' : delim
+    let reverseMapper
+    if (mapper) {
+        reverseMapper = Object.fromEntries(Object.entries(mapper).map(([ k, v, ]) => [ v, k, ]))
+    }
+    function verify(values) {
+        return Array.from(values).filter(v => {
+            if (allValues.includes(v)) {
+                return true
+            } else {
+                console.warn(`Invalid value: ${value} not in ${allValues}`)
+                return false
+            }
+        })
+    }
+
+    const encode = values => {
+        values = verify(values)
+        if (mapper) {
+            values = values.map(v => mapper[v])
+        }
+        return values.join(delim)
+    }
+
+    const encodedInit = encode(init)
+
+    return {
+        encode: values => {
+            const enc = encode(values)
+            if (enc === encodedInit) return undefined
+            return enc
+        },
+        decode: s => {
+            if (!s && s !== '') {
+                return init
+            }
+            let values = s.split(delim)
+            if (reverseMapper) {
+                values = values.filter(v => {
+                    if (v in reverseMapper) {
+                        return true
+                    } else {
+                        console.warn(`Unrecognized value: ${v} not in ${Object.keys(reverseMapper).join(",")}`)
+                        return false
+                    }
+                }).map(v => reverseMapper[v])
+            }
+            values = verify(values)
+            return values
+        },
+        use: useSet,
+    }
 }
 
 export function parseQueryParams({ params }) {
@@ -24,7 +80,7 @@ export function parseQueryParams({ params }) {
     const search = Object.fromEntries(new URLSearchParams(searchStr).entries())
     const state = Object.fromEntries(
         Object.entries(params).map(([ k, param ]) => {
-            const [ val, set ] = useState(param.decode(search[k]))
+            const [ val, set ] = (param.use || useState)(param.decode(search[k]))
             return [ k, { val, set, param } ]
         })
     )
