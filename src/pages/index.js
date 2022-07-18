@@ -9,7 +9,7 @@ import Map from '../components/Map';
 import styles from '../../styles/Home.module.css';
 
 import {useEffect, useMemo, useReducer, useState} from "react";
-import {bikeLaneTypes, dataUrls, layerInfos, layerOrder, MAPS, wardInfos} from "../components/layers";
+import {bikeLaneTypes, bmpLaneTypes, dataUrls, allLayerInfos, layerOrder, MAPS, wardInfos} from "../components/layers";
 import {useSet} from "../utils/use-set";
 
 const DEFAULT_CENTER = [40.720, -74.066]
@@ -144,6 +144,29 @@ function MapLayer({ TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, P
         )
     }
 
+    const bmpLayer = () => {
+        const rank = activeLayerIndices['bmp']
+        return (
+            fetchedLayers['bmp']?.map(({ properties, geometry }, idx) => {
+                let { Street, Type, Direction, Lane_count } = properties
+                const color = bmpLaneTypes[Type?.trim()]?.color || 'black'
+                if (geometry.type !== 'LineString') {
+                    console.warn(`Street ${Street}, geometry type ${geometry.type}`)
+                    return
+                }
+                const positions = geometry.coordinates.map(([lon, lat]) => [lat, lon])
+                const key = `${Street}_${idx}_rank${rank}`
+                return (
+                    <Polyline color={color} key={key} positions={positions}>
+                        <Tooltip sticky={true}>
+                            {Street} ({Type}, {Direction}/b{Lane_count && `, ${Lane_count} lanes`})
+                        </Tooltip>
+                    </Polyline>
+                )
+            })
+        )
+    }
+
     const { url, attribution } = MAPS['alidade_smooth_dark']
 
     return (
@@ -153,6 +176,7 @@ function MapLayer({ TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, P
             {('roads' in fetchedLayers) && activeLayers.includes('roads') && roadsLayer()}
             {('bikeLanes' in fetchedLayers) && activeLayers.includes('bikeLanes') && bikeLanesLayer()}
             {('citibike' in fetchedLayers) && activeLayers.includes('citibike') && citibikeLayer()}
+            {('bmp' in fetchedLayers) && activeLayers.includes('bmp') && bmpLayer()}
             {('HIN' in fetchedLayers) && activeLayers.includes('HIN') && hinLayer()}
             {('lur' in fetchedLayers) && activeLayers.includes('lur') && lurLayer()}
             {/*<ZoomControl position="bottomleft" />*/}
@@ -161,7 +185,7 @@ function MapLayer({ TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, P
 }
 
 export default function Home({ layers, }) {
-    const [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ] = useSet([ 'wards', 'bikeLanes', 'citibike', /*'HIN'*/ ])
+    const [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ] = useSet([ 'wards', 'citibike', 'bmp', ])
     let activeLayers = Array.from(rawActiveLayers).map(k => [ layerOrder.indexOf(k), k ]).sort(([ l ], [ r ]) => l - r).map(([ _, k ]) => k)
 
     const [ fetchedLayers, addFetchedLayer ] = useReducer(
@@ -253,6 +277,8 @@ export default function Home({ layers, }) {
 
         Promise.all(activeLayers.map(fetchLayer)).catch(console.error)
     }, [ activeLayers ])
+
+    const layerInfos = allLayerInfos.filter(({ key }) => ['wards', 'bmp', 'bikeLanes', 'citibike',].includes(key))
 
     return (
         <div className={styles.container}>

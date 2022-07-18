@@ -15,6 +15,14 @@ export const bikeLaneTypes = {
     'SHARED USE PATH': { color: '#00FFFF', },
 }
 
+export const bmpLaneTypes = {
+    'NEIGHBORHOOD GREENWAY': { color: 'lightblue', },
+    'BIKE LANE': { color: 'lightorange', },
+    'PROTECTED BIKE LANE': { color: 'lightgreen', },
+    'SHARED USE LANE': { color: 'lightred', },
+    'SHARED USE PATH': { color: 'lightyellow', },
+}
+
 export const MAPS = {
     openstreetmap: {
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -37,9 +45,10 @@ export const dataUrls = {
     'county2': 'County_Boundaries_of_NJ_2x.geojson',
     'county5': 'County_Boundaries_of_NJ_5x.geojson',
     'county10': 'County_Boundaries_of_NJ_10x.geojson',
+    'bmp': "Proposed Full Network.geojson",
 }
 
-export const layerInfos = [
+export const allLayerInfos = [
     { label: "Bike Lanes", key: "bikeLanes", },
     { label: "Roads", key: "roads", },
     { label: "Wards", key: "wards", },
@@ -49,7 +58,8 @@ export const layerInfos = [
     { label: "Counties/2", key: "county2", },
     { label: "Counties/5", key: "county5", },
     { label: "Counties/10", key: "county10", },
+    { label: "Bike Master Plan", key: "bmp", }
     // { label: "Light-Up Ride 7/8/22", key: "lur"},
 ]
 
-export const layerOrder = [ 'wards', 'counties', 'county2', 'county5', 'county10', 'roads', 'HIN', 'bikeLanes', 'citibike', ]
+export const layerOrder = [ 'wards', 'counties', 'county2', 'county5', 'county10', 'roads', 'HIN', 'bmp', 'bikeLanes', 'citibike', ]

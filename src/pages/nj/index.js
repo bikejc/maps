@@ -7,7 +7,7 @@ import Map from '../../components/Map';
 import styles from '../../../styles/Home.module.css';
 
 import {Fragment, useEffect, useMemo, useReducer, useState} from "react";
-import {dataUrls, layerInfos, layerOrder, MAPS, wardInfos} from "../../components/layers";
+import {dataUrls, allLayerInfos, layerOrder, MAPS, wardInfos} from "../../components/layers";
 import {useSet} from "../../utils/use-set";
 import {useRouter} from "next/router";
 
@@ -19,17 +19,17 @@ function randomColor() {
     return `#${r}${g}${b}`
 }
 
-function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom, counties}) {
+function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom, }) {
     const map = useMapEvents({
         move: () => setLL(map.getCenter(), 'replaceIn'),
         zoom: () => setZoom(map.getZoom(), 'replaceIn'),
     })
 
-    const countiesLayer = useMemo(() => (layerKey, county) => {
+    const countiesLayer = (layerKey) => {
         seedrandom(4, { global: true })
         const rank = activeLayerIndices[layerKey]
         return (
-            fetchedLayers[layerKey]?.filter(({ properties }) => !counties || counties.includes(properties.COUNTY))?.map(({properties, geometry}) => {
+            fetchedLayers[layerKey]?.map(({properties, geometry}) => {
                 const { COUNTY, COUNTY_LABEL, POP2010, POPDEN2010, } = properties
                 const {type, coordinates} = geometry
                 const fillColor = randomColor()
@@ -77,8 +77,7 @@ function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, 
                 }
             })
         )
-    }, [ fetchedLayers, activeLayerIndices ]
-    )
+    }
 
     const { url, attribution } = MAPS['alidade_smooth_dark']
 
@@ -95,23 +94,32 @@ function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, 
 
 const pathnameRegex = /[^?#]+/u;
 
-export default function Home({}) {
-    const layers = []
-    const router = useRouter()
-    const [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ] = useSet([ 'county10' ])
-    let activeLayers = Array.from(rawActiveLayers).map(k => [ layerOrder.indexOf(k), k ]).sort(([ l ], [ r ]) => l - r).map(([ _, k ]) => k)
+function llParam(init, places) {
+    return {
+        encode: ({ lat, lng }) => places ? `${lat.toFixed(places)}_${lng.toFixed(places)}` : `${lat}_${lng}`,
+        decode: v => {
+            if (!v) return init
+            const [ lat, lng ] = v.split("_").map(parseFloat)
+            return { lat, lng }
+        },
+    }
+}
 
+function floatParam(init) {
+    return { encode: v => v.toString(), decode: v => v ? parseFloat(v) : init }
+}
+
+export function parseQueryParams({ params }) {
+    const router = useRouter()
     const searchStr = router.asPath.replace(pathnameRegex, '')
     const search = Object.fromEntries(new URLSearchParams(searchStr).entries())
-    let ll
-    if (search.ll) {
-        const [ lat, lng ] = search.ll.split("_").map(parseFloat)
-        ll = { lat, lng }
-    }
-    const [ { lat, lng, }, setLL ] = useState(ll || DEFAULT_CENTER)
-    const [ zoom, setZoom ] = useState((search.z !== undefined) && parseFloat(search.z) || DEFAULT_ZOOM);
-
-    const [ counties, setCounties ] = useState(search.counties?.split(',') /*|| ['ATLANTIC', 'BURLINGTON', 'CAMDEN']*/)
+    const state = Object.fromEntries(
+        Object.entries(params).map(([ k, param ]) => {
+            const [ val, set ] = useState(param.decode(search[k]))
+            return [ k, { val, set, param } ]
+        })
+    )
+    const stateValues = Object.values(state).map(({ val }) => val)
 
     const match = router.asPath.match(pathnameRegex);
     const pathname = match ? match[0] : router.asPath;
@@ -119,22 +127,40 @@ export default function Home({}) {
     useEffect(
         () => {
             const places = 3
-            const ll = `${lat.toFixed(places)}_${lng.toFixed(places)}`
-            const params = { ll, z: zoom }
-            if (counties) {
-                params.counties = counties
-            }
-            const search = new URLSearchParams(params).toString()
+            const query = {}
+            Object.entries(state).map(([ k, { val, param, } ]) => {
+                const s = param.encode(val)
+                if (s !== undefined) {
+                    query[k] = s
+                }
+            })
+            // const ll = `${lat.toFixed(places)}_${lng.toFixed(places)}`
+            // const params = { ll, z: zoom }
+            const search = new URLSearchParams(query).toString()
             const hash = ''
             // console.log("search:", search)
             router.replace(
                 { pathname: router.pathname, hash, search},
                 { pathname, hash, search, },
                 { shallow: true, scroll: false, }
-            )/*.then(rv => console.log(`replaced: ${rv}`))*/
+            )
         },
-        [ lat, lng, zoom, pathname, counties, ]
+        [ ...stateValues, pathname, ]
     )
+
+    return Object.fromEntries(Object.entries(state).map(([ k, { val, set, }]) => [ k, [ val, set, ] ]))
+}
+
+export default function Home({}) {
+    const layers = []
+    const [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ] = useSet([ 'county10' ])
+    let activeLayers = Array.from(rawActiveLayers).map(k => [ layerOrder.indexOf(k), k ]).sort(([ l ], [ r ]) => l - r).map(([ _, k ]) => k)
+
+    const params = {
+        ll: llParam(DEFAULT_CENTER, 3),
+        z: floatParam(DEFAULT_ZOOM),
+    }
+    const { ll: [ { lat, lng }, setLL ], z: [ zoom, setZoom, ] } = parseQueryParams({ params })
 
     const [ fetchedLayers, addFetchedLayer ] = useReducer(
         (layers, [ k, layer ]) => {
@@ -217,7 +243,7 @@ export default function Home({}) {
             <main className={styles.main}>{
                 (typeof window !== undefined) && <>
                     <Map className={styles.homeMap} center={{ lat, lng }} zoom={zoom} zoomControl={true} zoomDelta={0.5} zoomSnap={0.5}>
-                        { props => MapLayer({ ...props, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom, counties, }) }
+                        { props => MapLayer({ ...props, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom, }) }
                     </Map>
                     <div className={styles.title}>{title}</div>
                     <div className={css.gearContainer} onMouseEnter={() => setHoverSettings(true)} onMouseLeave={() => setHoverSettings(false)}>
@@ -228,7 +254,7 @@ export default function Home({}) {
                                 <div className={css.menu}>
                                     <ul className={css.layers}>
                                         {
-                                            layerInfos.map(({ label, key, }) => {
+                                            allLayerInfos.map(({ label, key, }) => {
                                                 const active = activeLayers.includes(key)
                                                 function onChange(e) {
                                                     const checked = e.target.checked
