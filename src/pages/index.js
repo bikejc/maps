@@ -256,11 +256,12 @@ export default function Home({ layers, }) {
     const title = useMemo(() => {
         let title
         const titleElems = []
-        if (activeLayers.includes('bikeLanes')) titleElems.push(['Protected Bike Lanes'])
-        if (activeLayers.includes('roads')) titleElems.push(['Roads'])
+        // layerOrder = [ 'wards', 'counties', 'county2', 'county5', 'county10', 'roads', 'HIN', 'bmp', 'bikeLanes', 'citibike', ]
         if (activeLayers.includes('wards')) titleElems.push(['Wards'])
-        if (activeLayers.includes('citibike')) titleElems.push(['Citi Bike Docks'])
+        if (activeLayers.includes('roads')) titleElems.push(['Roads'])
+        if (activeLayers.includes('bikeLanes')) titleElems.push(['Protected Bike Lanes'])
         if (activeLayers.includes('bmp')) titleElems.push(['Bike Master Plan'])
+        if (activeLayers.includes('citibike')) titleElems.push(['Citi Bike Docks'])
         if (titleElems.length === 0) {
             title = null
         } else {
