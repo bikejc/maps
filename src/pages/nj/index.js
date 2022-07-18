@@ -7,9 +7,9 @@ import Map from '../../components/Map';
 import styles from '../../../styles/Home.module.css';
 
 import {Fragment, useEffect, useMemo, useReducer, useState} from "react";
-import {dataUrls, allLayerInfos, layerOrder, MAPS, wardInfos} from "../../components/layers";
+import {allLayerInfos, dataUrls, layerOrder, MAPS} from "../../components/layers";
 import {useSet} from "../../utils/use-set";
-import {useRouter} from "next/router";
+import {floatParam, llParam, parseQueryParams} from "../../utils/params";
 
 const DEFAULT_CENTER = { lat: 40.1067, lng: -74.9362 }
 const DEFAULT_ZOOM = 9
@@ -19,7 +19,7 @@ function randomColor() {
     return `#${r}${g}${b}`
 }
 
-function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom, }) {
+function MapLayer({ useMapEvents, TileLayer, Polygon, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom, }) {
     const map = useMapEvents({
         move: () => setLL(map.getCenter(), 'replaceIn'),
         zoom: () => setZoom(map.getZoom(), 'replaceIn'),
@@ -90,65 +90,6 @@ function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, 
             {('county10' in fetchedLayers) && activeLayers.includes('county10') && countiesLayer('county10')}
         </>
     )
-}
-
-const pathnameRegex = /[^?#]+/u;
-
-function llParam(init, places) {
-    return {
-        encode: ({ lat, lng }) => places ? `${lat.toFixed(places)}_${lng.toFixed(places)}` : `${lat}_${lng}`,
-        decode: v => {
-            if (!v) return init
-            const [ lat, lng ] = v.split("_").map(parseFloat)
-            return { lat, lng }
-        },
-    }
-}
-
-function floatParam(init) {
-    return { encode: v => v.toString(), decode: v => v ? parseFloat(v) : init }
-}
-
-export function parseQueryParams({ params }) {
-    const router = useRouter()
-    const searchStr = router.asPath.replace(pathnameRegex, '')
-    const search = Object.fromEntries(new URLSearchParams(searchStr).entries())
-    const state = Object.fromEntries(
-        Object.entries(params).map(([ k, param ]) => {
-            const [ val, set ] = useState(param.decode(search[k]))
-            return [ k, { val, set, param } ]
-        })
-    )
-    const stateValues = Object.values(state).map(({ val }) => val)
-
-    const match = router.asPath.match(pathnameRegex);
-    const pathname = match ? match[0] : router.asPath;
-
-    useEffect(
-        () => {
-            const places = 3
-            const query = {}
-            Object.entries(state).map(([ k, { val, param, } ]) => {
-                const s = param.encode(val)
-                if (s !== undefined) {
-                    query[k] = s
-                }
-            })
-            // const ll = `${lat.toFixed(places)}_${lng.toFixed(places)}`
-            // const params = { ll, z: zoom }
-            const search = new URLSearchParams(query).toString()
-            const hash = ''
-            // console.log("search:", search)
-            router.replace(
-                { pathname: router.pathname, hash, search},
-                { pathname, hash, search, },
-                { shallow: true, scroll: false, }
-            )
-        },
-        [ ...stateValues, pathname, ]
-    )
-
-    return Object.fromEntries(Object.entries(state).map(([ k, { val, set, }]) => [ k, [ val, set, ] ]))
 }
 
 export default function Home({}) {
@@ -243,7 +184,14 @@ export default function Home({}) {
             <main className={styles.main}>{
                 (typeof window !== undefined) && <>
                     <Map className={styles.homeMap} center={{ lat, lng }} zoom={zoom} zoomControl={true} zoomDelta={0.5} zoomSnap={0.5}>
-                        { props => MapLayer({ ...props, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom, }) }
+                        { props => MapLayer({
+                            ...props,
+                            activeLayerIndices,
+                            fetchedLayers,
+                            activeLayers,
+                            setLL,
+                            setZoom,
+                        }) }
                     </Map>
                     <div className={styles.title}>{title}</div>
                     <div className={css.gearContainer} onMouseEnter={() => setHoverSettings(true)} onMouseLeave={() => setHoverSettings(false)}>

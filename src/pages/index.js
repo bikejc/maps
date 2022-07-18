@@ -11,8 +11,9 @@ import styles from '../../styles/Home.module.css';
 import {useEffect, useMemo, useReducer, useState} from "react";
 import {bikeLaneTypes, bmpLaneTypes, dataUrls, allLayerInfos, layerOrder, MAPS, wardInfos} from "../components/layers";
 import {useSet} from "../utils/use-set";
+import {floatParam, llParam, parseQueryParams, pathnameRegex} from "../utils/params";
 
-const DEFAULT_CENTER = [40.720, -74.066]
+const DEFAULT_CENTER = { lat: 40.720, lng: -74.066, }
 const DEFAULT_ZOOM = 13
 
 function loadFeatures(name) {
@@ -31,7 +32,12 @@ export async function getStaticProps(context) {
     }
 }
 
-function MapLayer({ TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, }) {
+function MapLayer({ useMapEvents, TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, Popup, Tooltip, activeLayerIndices, fetchedLayers, activeLayers, setLL, setZoom, }) {
+    const map = useMapEvents({
+        move: () => setLL(map.getCenter(), 'replaceIn'),
+        zoom: () => setZoom(map.getZoom(), 'replaceIn'),
+    })
+
     const wardsLayer = () => {
         const rank = activeLayerIndices['wards']
         return (
@@ -185,8 +191,14 @@ function MapLayer({ TileLayer, Marker, Circle, Polygon, Polyline, ZoomControl, P
 }
 
 export default function Home({ layers, }) {
-    const [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ] = useSet([ 'wards', 'citibike', 'bmp', ])
+    const [ rawActiveLayers, { add: addActiveLayer, remove: removeActiveLayer } ] = useSet([ 'wards', 'bikeLanes', 'citibike', /*'bmp',*/ ])
     let activeLayers = Array.from(rawActiveLayers).map(k => [ layerOrder.indexOf(k), k ]).sort(([ l ], [ r ]) => l - r).map(([ _, k ]) => k)
+
+    const params = {
+        ll: llParam(DEFAULT_CENTER, 3),
+        z: floatParam(DEFAULT_ZOOM),
+    }
+    const { ll: [ { lat, lng }, setLL ], z: [ zoom, setZoom, ] } = parseQueryParams({ params })
 
     const [ fetchedLayers, addFetchedLayer ] = useReducer(
         (layers, [ k, layer ]) => {
@@ -217,7 +229,10 @@ export default function Home({ layers, }) {
     const [ showSettings, setShowSettings ] = useState(false)
     const [ hoverSettings, setHoverSettings ] = useState(false)
 
-    const href = (typeof window !== 'undefined') && window.location.href
+    // const router = useRouter()
+    const href = (typeof window !== 'undefined') && window.location.href || undefined
+    const match = href?.match(pathnameRegex);
+    const pathname = match ? match[0] : href;
 
     const title = useMemo(() => {
         let title
@@ -251,8 +266,8 @@ export default function Home({ layers, }) {
             }
             addFetchedLayer([ k, null ])
             const path = dataUrls[k]
-            const url = `${href}/${path}`
-            console.log(`fetching layer: ${k}`)
+            const url = `${pathname}/${path}`
+            console.log(`fetching layer: ${k}, url: ${url}`)
             const res = await fetch(url)
             console.log(`fetched layer: ${k}`)
             let newLayer
@@ -300,45 +315,52 @@ export default function Home({ layers, }) {
 
             <main className={styles.main}>{
                 (typeof window !== undefined) && <>
-                <Map className={styles.homeMap} center={DEFAULT_CENTER} zoom={DEFAULT_ZOOM} zoomControl={false}>
-                    { props => MapLayer({ ...props, activeLayerIndices, fetchedLayers, activeLayers, }) }
-                </Map>
-                <div className={styles.title}>{title}</div>
-                <div className={css.gearContainer} onMouseEnter={() => setHoverSettings(true)} onMouseLeave={() => setHoverSettings(false)}>
-                    <div className={css.settings}>
-                        <i className={`fa fa-gear ${css.gear}`} onClick={() => setShowSettings(!showSettings)} />
-                        {
-                            (showSettings || hoverSettings) &&
-                            <div className={css.menu}>
-                                <ul className={css.layers}>
-                                    {
-                                        layerInfos.map(({ label, key, }) => {
-                                            const active = activeLayers.includes(key)
-                                            function onChange(e) {
-                                                const checked = e.target.checked
-                                                if (checked === active) {
-                                                    console.error(`layer ${key}: checked ${checked} != active ${active}`)
+                    <Map className={styles.homeMap} center={{ lat, lng, }} zoom={zoom} zoomControl={false}>
+                        { props => MapLayer({
+                            ...props,
+                            activeLayerIndices,
+                            fetchedLayers,
+                            activeLayers,
+                            setLL,
+                            setZoom,
+                        }) }
+                    </Map>
+                    <div className={styles.title}>{title}</div>
+                    <div className={css.gearContainer} onMouseEnter={() => setHoverSettings(true)} onMouseLeave={() => setHoverSettings(false)}>
+                        <div className={css.settings}>
+                            <i className={`fa fa-gear ${css.gear}`} onClick={() => setShowSettings(!showSettings)} />
+                            {
+                                (showSettings || hoverSettings) &&
+                                <div className={css.menu}>
+                                    <ul className={css.layers}>
+                                        {
+                                            layerInfos.map(({ label, key, }) => {
+                                                const active = activeLayers.includes(key)
+                                                function onChange(e) {
+                                                    const checked = e.target.checked
+                                                    if (checked === active) {
+                                                        console.error(`layer ${key}: checked ${checked} != active ${active}`)
+                                                    }
+                                                    if (checked) {
+                                                        addActiveLayer(key)
+                                                    } else {
+                                                        removeActiveLayer(key)
+                                                    }
                                                 }
-                                                if (checked) {
-                                                    addActiveLayer(key)
-                                                } else {
-                                                    removeActiveLayer(key)
-                                                }
-                                            }
-                                            return <li key={key}><label><input type={"checkbox"} onChange={onChange} checked={active} />{label}</label></li>
-                                        })
-                                    }
-                                </ul>
-                                <div className={css.icons}>
-                                    <a href={"https://github.com/bikejc/maps"}><img alt={"GitHub logo"} className={css.icon} src={"./gh.png"} /></a>
-                                    <a href={"https://bikejc.org"}><img alt={"Bike JC logo"} className={css.icon} src={"./logo.png"} /></a>
+                                                return <li key={key}><label><input type={"checkbox"} onChange={onChange} checked={active} />{label}</label></li>
+                                            })
+                                        }
+                                    </ul>
+                                    <div className={css.icons}>
+                                        <a href={"https://github.com/bikejc/maps"}><img alt={"GitHub logo"} className={css.icon} src={"./gh.png"} /></a>
+                                        <a href={"https://bikejc.org"}><img alt={"Bike JC logo"} className={css.icon} src={"./logo.png"} /></a>
+                                    </div>
                                 </div>
-                            </div>
-                        }
+                            }
+                        </div>
                     </div>
-                </div>
-                </>}
-            </main>
+                </>
+            }</main>
         </div>
     )
 }
