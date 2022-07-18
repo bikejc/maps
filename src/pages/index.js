@@ -11,6 +11,7 @@ import styles from '../../styles/Home.module.css';
 import {useEffect, useMemo, useReducer, useState} from "react";
 import {bikeLaneTypes, bmpLaneTypes, dataUrls, allLayerInfos, layerOrder, MAPS, wardInfos} from "../components/layers";
 import {enumMultiParam, floatParam, llParam, parseQueryParams, pathnameRegex} from "../utils/params";
+import {useRouter} from "next/router";
 
 const DEFAULT_CENTER = { lat: 40.720, lng: -74.066, }
 const DEFAULT_ZOOM = 13
@@ -311,6 +312,9 @@ export default function Home({ layers, }) {
         Promise.all(activeLayers.map(fetchLayer)).catch(console.error)
     }, [ activeLayers ])
 
+    const router = useRouter()
+    const basePath = router.basePath
+
     return (
         <div className={styles.container}>
             <Head>
@@ -368,8 +372,8 @@ export default function Home({ layers, }) {
                                         }
                                     </ul>
                                     <div className={css.icons}>
-                                        <a href={"https://github.com/bikejc/maps"}><img alt={"GitHub logo"} className={css.icon} src={"./gh.png"} /></a>
-                                        <a href={"https://bikejc.org"}><img alt={"Bike JC logo"} className={css.icon} src={"./logo.png"} /></a>
+                                        <a href={"https://github.com/bikejc/maps"}><img alt={"GitHub logo"} className={css.icon} src={`${basePath}/gh.png`} /></a>
+                                        <a href={"https://bikejc.org"}><img alt={"Bike JC logo"} className={css.icon} src={`${basePath}/logo.png`} /></a>
                                     </div>
                                 </div>
                             }
