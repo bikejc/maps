@@ -259,14 +259,12 @@ export default function Home({ layers, }) {
         if (activeLayers.includes('bikeLanes')) titleElems.push(['Protected Bike Lanes'])
         if (activeLayers.includes('roads')) titleElems.push(['Roads'])
         if (activeLayers.includes('wards')) titleElems.push(['Wards'])
+        if (activeLayers.includes('citibike')) titleElems.push(['Citi Bike Docks'])
+        if (activeLayers.includes('bmp')) titleElems.push(['Bike Master Plan'])
         if (titleElems.length === 0) {
             title = null
-        } else if (titleElems.length === 1) {
-            title = `JC ${titleElems[0]}`
-        } else if (titleElems.length === 2) {
-            title = `JC ${titleElems[0]} & ${titleElems[1]}`
-        } else if (titleElems.length === 3) {
-            title = `JC ${titleElems[0]}, ${titleElems[1]}, & ${titleElems[2]}`
+        } else {
+            title = `JC ${titleElems.join(', ')}`
         }
         console.log(activeLayers, title, titleElems)
         return title
@@ -328,14 +326,14 @@ export default function Home({ layers, }) {
                 <meta property="og:url" content="https://bikejc.github.io/maps" key="ogurl" />
                 <meta property="og:type" content="website" />
                 <meta property="og:image" content="https://bikejc.github.io/maps/1-pbls.png" key="ogimage" />
-                <meta property="og:site_name" content="Bike JC Protected Bike Lane Map" key="ogsitename" />
-                <meta property="og:title" content="JC Protected Bike Lane & Ward Map" key="ogtitle" />
+                <meta property="og:site_name" content="JC Bike Lane Map" key="ogsitename" />
+                <meta property="og:title" content="JC Bike Lane + Ward Map" key="ogtitle" />
                 <meta property="og:description" content={"≈10 protected bike lanes overlaid on the 6 council wards"} key="ogdesc" />
             </Head>
 
             <main className={styles.main}>{
                 (typeof window !== undefined) && <>
-                    <Map className={styles.homeMap} center={{ lat, lng, }} zoom={zoom} zoomControl={false}>
+                    <Map className={styles.homeMap} center={{ lat, lng, }} zoom={zoom} zoomControl={false} zoomSnap={0.5} zoomDelta={0.5}>
                         { props => MapLayer({
                             ...props,
                             activeLayerIndices,
