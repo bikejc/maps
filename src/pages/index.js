@@ -318,7 +318,7 @@ export default function Home({ layers, }) {
         <div className={styles.container}>
             <Head>
                 <title>{title}</title>
-                <link rel="icon" href="./favicon.ico" />
+                <link rel="icon" href={`${basePath}/favicon.ico`} />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
                 <meta name="twitter:card" content="summary" key="twcard" />
