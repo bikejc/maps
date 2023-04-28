@@ -38,7 +38,7 @@ const layerKeys = layerInfos.map(({ key }) => key)
 export default function Home({ layers, }) {
     const params = {
         l: enumMultiParam({
-            init: [ 'wards', 'bikeLanes', 'citibike', /*'bmp',*/ ],
+            init: [ 'wards', 'bikeLanes', /* 'citibike', 'bmp', */ ],
             allValues: layerKeys,
             mapper: { 'wards': 'w', 'bikeLanes': 'b', 'citibike': 'c', 'bmp': 'p', 'roads': 'r', 'HIN': 'h' },
             delim: '',

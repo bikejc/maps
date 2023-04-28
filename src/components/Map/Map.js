@@ -79,7 +79,7 @@ function MapLayer({ activeLayerIndices, fetchedLayers, activeLayers, setLL, setZ
           const position = [ geometry.y, geometry.x ]
           const key = `${OBJECTID}_rank${rank}`
           return (
-              <Circle key={key} center={position} color={"orange"} radius={10} opacity={1} weight={10} fill={true} fillColor={"orange"} fillOpacity={1}>
+              <Circle key={key} center={position} color={"lightblue"} radius={10} opacity={1} weight={10} fill={true} fillColor={"lightblue"} fillOpacity={1}>
                 <Tooltip sticky={true}>
                   {name} ({StationID})
                 </Tooltip>
