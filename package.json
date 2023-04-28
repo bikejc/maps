@@ -1,9 +1,10 @@
 {
-  "name": "next-leaflet-starter",
-  "homepage": "https://next-leaflet-starter.netlify.app",
+  "name": "bikejc-maps",
+  "description": "Jersey City bike lane, road, and ward maps",
+  "homepage": "https://bikejc.github.io/maps",
   "version": "0.1.0",
   "license": "MIT",
-  "author": "Colby Fayock <hello@colbyfayock.com>",
+  "author": "Ryan Williams <ryan@runsascoded.com",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,26 +13,26 @@
   },
   "dependencies": {
     "fast-xml-parser": "^4.0.8",
-    "leaflet": "^1.7.1",
+    "leaflet": "^1.9.3",
     "lodash": "^4.17.21",
-    "next": "^12.2.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-leaflet": "^3.2.5",
+    "next": "^13.2.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-leaflet": "^4.2.1",
     "sass": "^1.5.1",
     "scss": "^0.2.4",
     "seedrandom": "^3.0.5"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/colbyfayock/next-leaflet-starter"
+    "url": "https://github.com/bikejc/maps"
   },
   "bugs": {
-    "url": "https://github.com/colbyfayock/next-leaflet-starter/issues"
+    "url": "https://github.com/bikejc/maps/issues"
   },
   "devDependencies": {
     "@types/node": "^18.0.4",
-    "@types/react": "^18.0.15",
+    "@types/react": "^18.2.0",
     "typescript": "^4.7.4"
   }
 }

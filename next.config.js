@@ -1,4 +1,8 @@
+const basePath = "/maps"
+
 module.exports = {
   reactStrictMode: true,
-  basePath: "/maps",
+  basePath,
+  assetPrefix: basePath,
+  publicRuntimeConfig: { basePath, },
 }

@@ -1,3 +1,4 @@
+import getConfig from 'next/config'
 import Head from 'next/head';
 import css from '../index.module.scss'
 import seedrandom from 'seedrandom'
@@ -135,6 +136,9 @@ export default function Home({}) {
 
     const title = ""
 
+    const { publicRuntimeConfig: config } = getConfig()
+    const { basePath = "" } = config
+
     useEffect(() => {
         const fetchLayer = async (k) => {
             if (!href) return Promise.resolve()
@@ -148,7 +152,7 @@ export default function Home({}) {
             }
             addFetchedLayer([ k, null ])
             const path = dataUrls[k]
-            const url = `/${path}`
+            const url = `${basePath}/${path}`
             console.log(`fetching layer: ${k}`)
             const res = await fetch(url)
             console.log(`fetched layer: ${k}`)

@@ -30,7 +30,7 @@ export function enumMultiParam({ init, allValues, mapper, delim }) {
             if (allValues.includes(v)) {
                 return true
             } else {
-                console.warn(`Invalid value: ${value} not in ${allValues}`)
+                console.warn(`Invalid value: ${v} not in ${allValues}`)
                 return false
             }
         })
