@@ -13,9 +13,11 @@ jobs:
         with:
           node-version: '14.x'
       - name: Install dependencies
-        run: npm ci
-      - name: Build
-        run: npm run export && touch ./out/.nojekyll
+        working-directory: www
+        run: npm install
+      - name: Build, export
+        working-directory: www
+        run: npm run gha-export
       - name: Deploy GitHub Pages
         if: github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@4.1.0

@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next build && next export",
+    "export": "next build && next export -o out/maps",
+    "gha-export": "next build && next export && touch out/.nojekyll",
     "start": "next start"
   },
   "dependencies": {
