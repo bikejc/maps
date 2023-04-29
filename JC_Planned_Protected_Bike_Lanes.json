@@ -194,7 +194,7 @@
         "To_": "LIBERTY STATE PARK LRT STATION",
         "Direction": "N/S",
         "Ward": "F",
-        "Status": "PLANNED",
+        "Status": "TABLED",
         "LaneCount": "2",
         "InstallYear": null,
         "UpdateYear": null,
@@ -275,7 +275,6 @@
         "To_": "GREENE ST",
         "Direction": "E/W",
         "Ward": "E",
-        "Status": "PLANNED",
         "LaneCount": "2",
         "InstallYear": null,
         "UpdateYear": null,
@@ -316,7 +315,6 @@
         "To_": "OBSERVER HWY",
         "Direction": "N/S",
         "Ward": "E",
-        "Status": "PLANNED",
         "LaneCount": "2",
         "InstallYear": null,
         "UpdateYear": null,
@@ -365,7 +363,6 @@
         "To_": "MARIN BLVD",
         "Direction": "E/W",
         "Ward": "E/F",
-        "Status": "PLANNED",
         "LaneCount": "2",
         "InstallYear": null,
         "UpdateYear": null,
@@ -438,7 +435,6 @@
         "To_": "BAYVIEW AVE",
         "Direction": "N/S",
         "Ward": "F",
-        "Status": "PLANNED",
         "LaneCount": "2",
         "InstallYear": null,
         "UpdateYear": null,
@@ -985,7 +981,7 @@
         "Type": "PROTECTED BIKE LANE",
         "StreetName": "COLES AVE",
         "From_": "10TH ST",
-        "To_": "18TH ST",
+        "To_": "14TH ST",
         "Direction": "N/S",
         "Ward": "E",
         "Status": "PLANNED",
@@ -1028,6 +1024,38 @@
               -74.0461386742275,
               40.7317932346727
             ],
+            [
+              -74.0461296356405,
+              40.7318891232852
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "attributes": {
+        "OBJECTID": 15,
+        "Type": "PROTECTED BIKE LANE",
+        "StreetName": "COLES AVE",
+        "From_": "14TH ST",
+        "To_": "18TH ST",
+        "Direction": "N/S",
+        "Ward": "E",
+        "LaneCount": "2",
+        "InstallYear": null,
+        "UpdateYear": null,
+        "SurfaceTreatment": null,
+        "ProtectionType": null,
+        "Buffered": null,
+        "Raised": null,
+        "Contraflow": null,
+        "Comments": null,
+        "Miles": null,
+        "Shape__Length": 859.090886317913
+      },
+      "geometry": {
+        "paths": [
+          [
             [
               -74.0461296356405,
               40.7318891232852
