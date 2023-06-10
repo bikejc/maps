@@ -1,5 +1,4 @@
 [![Jersey City Protected Bike Lane + Ward Map](./imgs/screenshot.png)](https://bikejc.github.io/maps/)
-(purple = planned for 2022)
 
 ## Interactive version: [bikejc.github.io/maps](https://bikejc.github.io/maps/)
 
