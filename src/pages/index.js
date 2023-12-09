@@ -82,7 +82,7 @@ export default function Home({ layers, }) {
         layers
     )
 
-    console.log("render: fetchedLayers:", fetchedLayers)
+    // console.log("render: fetchedLayers:", fetchedLayers)
     const activeLayerIndices = useMemo(
         () => Object.fromEntries(activeLayers.filter(k => k in fetchedLayers && fetchedLayers[k]).map((k, idx) => [ k, idx ])),
         [ fetchedLayers, activeLayers, ]
