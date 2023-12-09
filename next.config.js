@@ -1,4 +1,5 @@
-const basePath = "/maps"
+const basePath = process.env["CI"] ? "" : "/maps"
+console.log("basePath", basePath)
 
 module.exports = {
   reactStrictMode: true,
