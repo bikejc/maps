@@ -136,7 +136,7 @@ export default function Home({}) {
 
     const title = ""
 
-    const { publicRuntimeConfig: config } = getConfig()
+    const { publicRuntimeConfig: config = {} } = getConfig()
     const { basePath = "" } = config
 
     useEffect(() => {
