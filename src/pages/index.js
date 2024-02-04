@@ -23,7 +23,7 @@ function loadFeatures(name) {
 
 export async function getStaticProps(context) {
     const wards = loadFeatures('wards.json')
-    const bikeLanes = loadFeatures('jc-pbls.json').filter(({ attributes }) => attributes.Type === 'PROTECTED BIKE LANE')
+    const bikeLanes = loadFeatures('Jersey_City_Bike_Network/Jersey_City_Bike_Network.json').filter(({ attributes }) => attributes.Type === 'PROTECTED BIKE LANE')
     const plannedBikeLanes = loadFeatures('JC_Planned_Protected_Bike_Lanes.json')
     const allBikeLanes = bikeLanes.concat(plannedBikeLanes)
     const layers = { wards, bikeLanes: allBikeLanes, }
