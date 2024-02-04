@@ -1,10 +1,10 @@
-[![Jersey City Protected Bike Lane + Ward Map](./imgs/screenshot.png)](https://bikejc.github.io/maps/)
+[![Jersey City Protected Bike Lane + Ward Map](./public/jc-pbl-map.png)](https://map.bikejc.org)
 
-## Interactive version: [bikejc.github.io/maps](https://bikejc.github.io/maps/)
+## Interactive version: [map.bikejc.org](https://map.bikejc.org)
 
 ### Compared with the full road network <a id="pbls-vs-roads"></a>
 
-![](imgs/pbls-roads.gif)
+![](public/pbls-roads.gif)
 
 ## Scratchwork
 

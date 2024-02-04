@@ -177,9 +177,9 @@ export default function Home({}) {
                 <meta name="twitter:card" content="summary" key="twcard" />
                 <meta name="twitter:creator" content={"RunsAsCoded"} key="twhandle" />
 
-                <meta property="og:url" content="https://bikejc.github.io/maps" key="ogurl" />
+                <meta property="og:url" content="https://map.bikejc.org" key="ogurl" />
                 <meta property="og:type" content="website" />
-                <meta property="og:image" content="https://bikejc.github.io/maps/1-pbls.png" key="ogimage" />
+                <meta property="og:image" content="https://map.bikejc.org/jc-pbl-map.png" key="ogimage" />
                 <meta property="og:site_name" content="New Jersey County Map" key="ogsitename" />
                 <meta property="og:title" content="New Jersey County Map" key="ogtitle" />
                 <meta property="og:description" content={"County boundaries in NJ state"} key="ogdesc" />
