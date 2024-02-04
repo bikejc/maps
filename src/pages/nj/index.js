@@ -179,7 +179,7 @@ export default function Home({}) {
 
                 <meta property="og:url" content="https://map.bikejc.org" key="ogurl" />
                 <meta property="og:type" content="website" />
-                <meta property="og:image" content="https://map.bikejc.org/jc-pbl-map.png" key="ogimage" />
+                <meta property="og:image" content="https://map.bikejc.org/screenshots/pbls.png" key="ogimage" />
                 <meta property="og:site_name" content="New Jersey County Map" key="ogsitename" />
                 <meta property="og:title" content="New Jersey County Map" key="ogtitle" />
                 <meta property="og:description" content={"County boundaries in NJ state"} key="ogdesc" />

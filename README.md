@@ -1,22 +1,23 @@
-[![Jersey City Protected Bike Lane + Ward Map](./public/jc-pbl-map.png)](https://map.bikejc.org)
+[![Jersey City Protected Bike Lane + Ward Map](./public/screenshots/pbls.png)](https://map.bikejc.org)
 
 ## Interactive version: [map.bikejc.org](https://map.bikejc.org)
 
 ### Compared with the full road network <a id="pbls-vs-roads"></a>
 
-![](public/pbls-roads.gif)
+![](public/screenshots/pbls-vs-roads.gif)
 
 ## Scratchwork
 
-### Process screenshots
-
+### Regenerate screenshots
 ```bash
-for f in 1-pbls.png 2-roads.png; do
-    convert -strip -crop 2240x2660+982+238 orig/$f cropped/$f
-done
+node screenshots.js
 ```
+Outputs to [public/screenshots](./public/screenshots).
+
+### Make gif
 ```bash
-convert -resize 50% -delay 150 -loop 0 cropped/1-pbls.png cropped/2-roads.png pbls-roads.gif
+cd public/screenshots
+convert -delay 150 -loop 0 pbls.png pbls-roads.png pbls-vs-roads.gif
 ```
 
 ### Fetch Data
