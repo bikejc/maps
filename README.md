@@ -22,6 +22,6 @@ convert -delay 150 -loop 0 pbls.png pbls-roads.png pbls-vs-roads.gif
 
 ### Fetch Data
 ```bash
-./download-map.py Jersey_City_Bike_Network
+./download-map.py -f Jersey_City_Bike_Network
 ```
 See [`download-map.py`](./download-map.py).
